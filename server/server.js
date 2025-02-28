@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import cookieParser from 'cookie-parser';
 import helmet from "helmet";
 import config from "./db/config.js";
+import userRoutes from "./routes/user.routes.js"
 dotenv.config()
 
 
@@ -21,6 +22,7 @@ app.use(helmet({
     crossOriginResourcePolicy : false
 }))
 
+app.use("/api/user",userRoutes)
 
 app.listen(port,()=>{
     console.log(`Server is Running on Port: ${port}`)
