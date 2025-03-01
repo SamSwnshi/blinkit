@@ -127,9 +127,6 @@ export const logout = async(req,res) =>{
     res.clearCookie("accessToken",cookiesOption)
     res.clearCookie("refreshToken",cookiesOption)
 
-    const removeRefreshToken = await UserModel.findByIdAndUpdate(userid,{
-        refresh_token : ""
-    })
 
     return res.json({
         message : "Logout successfully",
