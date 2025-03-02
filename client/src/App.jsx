@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       <Header />
-      <main >
+      <main className="min-h-[80vh]">
         <Outlet />
       </main>
       <Footer/>
