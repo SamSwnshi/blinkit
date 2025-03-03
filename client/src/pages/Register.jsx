@@ -65,7 +65,7 @@ const Register = () => {
             <ToastContainer position="top-center" autoClose={3000} />
             
             <div className='bg-sky-300 my-4 w-full max-w-lg mx-auto rounded p-7'>
-                <h2 className='text-2xl'>Welcome to Binkeyit</h2>
+                <h2 className='flex justify-center text-2xl'>Welcome to Binkeyit</h2>
 
                 <form className='grid gap-4 mt-6' onSubmit={handleSubmit}>
                     <div className='grid gap-1'>
@@ -136,7 +136,7 @@ const Register = () => {
                     </button>
                 </form>
 
-                <p>
+                <p className='flex justify-center'>
                     Already have an account? <Link to={"/login"} className='font-semibold text-green-700 hover:text-green-800'>Login</Link>
                 </p>
             </div>
