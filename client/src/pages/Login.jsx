@@ -6,12 +6,16 @@ import Axios from '../utils/config';
 import SummaryApi from '../common/SummaryApi';
 import AxiosToastError from '../utils/AxiosError';
 import { Link, useNavigate } from 'react-router-dom';
+import fetchUserDetails from '../utils/fetchUserDetails';
+import { useDispatch } from 'react-redux';
+import { setUserDetails } from '../store/userSlice';
 
 const Login = () => {
     const [data, setData] = useState({
         email: "",
         password: "",
     });
+    const dispatch = useDispatch()
 
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
@@ -24,7 +28,7 @@ const Login = () => {
         }));
     };
 
-    const valideValue = Object.values(data).every(el => el);
+    const isValid = Object.values(data).every(el => el.trim() !== "");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -34,27 +38,25 @@ const Login = () => {
                 ...SummaryApi.login,
                 data: data
             });
-            console.log(response)
 
             if (response.data.error) {
-                toast.error(response.data.message);
+                toast.error(response.data.message); // ✅ Show error toast
                 return;
             }
 
             if (response.data.message === "Login successfully") {
-                toast.success(response.data.message);
+                toast.success("Logged in successfully! 🎉"); // ✅ Show success toast
                 localStorage.setItem('accesstoken', response.data.data.accesstoken);
                 localStorage.setItem('refreshToken', response.data.data.refreshToken);
+                    const userDetails = await fetchUserDetails();
+                    dispatch(setUserDetails(userDetails.data))
 
-                setData({
-                    email: "",
-                    password: "",
-                });
+                setData({ email: "", password: "" });
 
-                navigate("/");
+                setTimeout(() => navigate("/"), 1500); // ✅ Delay navigation slightly
             }
         } catch (error) {
-            AxiosToastError(error);
+            AxiosToastError(error); // ✅ Show API error
         }
     };
 
@@ -94,19 +96,21 @@ const Login = () => {
                                 {showPassword ? <FaRegEye /> : <FaRegEyeSlash />}
                             </div>
                         </div>
-                       
                     </div>
 
                     <button
-                        disabled={!valideValue}
-                        className={`${valideValue ? "bg-green-800 hover:bg-green-700" : "bg-gray-500"} text-white py-2 rounded font-semibold my-3 tracking-wide`}
+                        disabled={!isValid}
+                        className={`${isValid ? "bg-green-800 hover:bg-green-700" : "bg-gray-500"} text-white py-2 rounded font-semibold my-3 tracking-wide`}
                     >
                         Login
                     </button>
                 </form>
 
                 <p className='flex justify-center'>
-                    Don't have an account?  <Link to={"/register"} className='font-semibold text-green-700 hover:text-green-800'>Register</Link>
+                    Don't have an account?  
+                    <Link to={"/register"} className='font-semibold text-green-700 hover:text-green-800 ml-1'>
+                        Register
+                    </Link>
                 </p>
             </div>
         </section>

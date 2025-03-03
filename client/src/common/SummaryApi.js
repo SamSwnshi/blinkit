@@ -19,7 +19,7 @@ const SummaryApi = {
     },
     userDetails : {
         url : '/api/user/user-details',
-        method : "get"
+        method : "get",
     },
 }
 
