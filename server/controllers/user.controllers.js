@@ -30,23 +30,16 @@ export const register = async (req, res) => {
 
     const save = await newUser.save();
 
-    // const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save?._id}`;
-
-    // const verifyEmail = await sendEmail({
-    //   sendTo: email,
-    //   subject: "Verify email from binkeyIt",
-    //   html: verifyEmailTemplate({
-    //     name,
-    //     url: VerifyEmailUrl,
-    //   }),
-    // });
-
     return res.status(201).json({
       message: "User register successfully",
       data: save,
+      error: false,
+      success: true,
     });
   } catch (error) {
-    return res.status(500).json({ message: error.message });
+    return res
+      .status(500)
+      .json({ message: error.message, error: true, success: false });
   }
 };
 
@@ -99,6 +92,8 @@ export const login = async (req, res) => {
 
     return res.json({
       message: "Login successfully",
+      error: false,
+      success: true,
       data: {
         user,
         accesstoken,
@@ -108,6 +103,8 @@ export const login = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       message: error.message || error,
+      error: true,
+      success: false,
     });
   }
 };
@@ -155,6 +152,8 @@ export const uploadAvatar = async (req, res) => {
 
     return res.json({
       message: "upload profile",
+      success: true,
+      error: false,
       data: {
         _id: userId,
         avatar: upload.url,
@@ -182,10 +181,14 @@ export const userDetails = async (req, res) => {
     return res.json({
       message: "user details",
       data: user,
+      error: false,
+      success: true,
     });
   } catch (error) {
     return res.status(500).json({
       message: "Something is wrong",
+      error: true,
+      success: false,
     });
   }
 };
@@ -214,12 +217,15 @@ export const updateUserDetails = async (req, res) => {
 
     return res.json({
       message: "Updated successfully",
-
+      error: false,
+      success: true,
       data: updateUser,
     });
   } catch (error) {
     return res.status(500).json({
       message: error.message || error,
+      error: true,
+      success: false,
     });
   }
 };
