@@ -1,7 +1,7 @@
 import sendEmail from "../db/sendEmail.js";
 import UserModel from "../models/user.models.js";
 import bcrypt from "bcrypt";
-import verifyEmailTemplate from "../utlis/veirfyEmailTemplates.js";
+// import verifyEmailTemplate from "../utlis/veirfyEmailTemplates.js";
 import generatedAccessToken from "../utlis/generatedAccessToken.js";
 import genertedRefreshToken from "../utlis/generatedRefreshToken.js";
 import uploadImage from "../utlis/cloudinary.js";
@@ -30,16 +30,16 @@ export const register = async (req, res) => {
 
     const save = await newUser.save();
 
-    const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save?._id}`;
+    // const VerifyEmailUrl = `${process.env.FRONTEND_URL}/verify-email?code=${save?._id}`;
 
-    const verifyEmail = await sendEmail({
-      sendTo: email,
-      subject: "Verify email from binkeyIt",
-      html: verifyEmailTemplate({
-        name,
-        url: VerifyEmailUrl,
-      }),
-    });
+    // const verifyEmail = await sendEmail({
+    //   sendTo: email,
+    //   subject: "Verify email from binkeyIt",
+    //   html: verifyEmailTemplate({
+    //     name,
+    //     url: VerifyEmailUrl,
+    //   }),
+    // });
 
     return res.status(201).json({
       message: "User register successfully",
@@ -85,9 +85,9 @@ export const login = async (req, res) => {
     const accesstoken = await generatedAccessToken(user._id);
     const refreshToken = await genertedRefreshToken(user._id);
 
-    // const updateUser = await UserModel.findByIdAndUpdate(user?._id,{
-    //     last_login_date : new Date()
-    // })
+    const updateUser = await UserModel.findByIdAndUpdate(user?._id, {
+      last_login_date: new Date(),
+    });
 
     const cookiesOption = {
       httpOnly: true,
@@ -169,23 +169,57 @@ export const uploadAvatar = async (req, res) => {
   }
 };
 
-export const userDetails = async(req,res) =>{
+export const userDetails = async (req, res) => {
   try {
-    const userId  = req.user.id
+    const userId = req.user.id;
 
-    console.log(userId)
+    console.log(userId);
 
-    const user = await UserModel.findById(userId).select('-password -refresh_token')
+    const user = await UserModel.findById(userId).select(
+      "-password -refresh_token"
+    );
 
     return res.json({
-        message : 'user details',
-        data : user,
-      
-    })
-} catch (error) {
+      message: "user details",
+      data: user,
+    });
+  } catch (error) {
     return res.status(500).json({
-        message : "Something is wrong",
-    
-    })
-}
-}
+      message: "Something is wrong",
+    });
+  }
+};
+
+export const updateUserDetails = async (req, res) => {
+  try {
+    const userId = req.user?.id; //auth middleware
+    const { name, email, mobile, password } = req.body;
+
+    let hashPassword = "";
+
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      hashPassword = await bcrypt.hash(password, salt);
+    }
+
+    const updateUser = await UserModel.updateOne(
+      { _id: userId },
+      {
+        ...(name && { name: name }),
+        ...(email && { email: email }),
+        ...(mobile && { mobile: mobile }),
+        ...(password && { password: hashPassword }),
+      }
+    );
+
+    return res.json({
+      message: "Updated successfully",
+
+      data: updateUser,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message || error,
+    });
+  }
+};
