@@ -1,15 +1,16 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; // ✅ Import toast
-import "react-toastify/dist/ReactToastify.css"; // ✅ Import Toastify styles
+import { toast } from "react-toastify"; 
+import "react-toastify/dist/ReactToastify.css"; 
 import Divider from "./Divider";
 import SummaryApi from "../common/SummaryApi";
-import { logout } from '../store/userSlice';
+import { logout } from "../store/userSlice";
 import Axios from "../utils/config";
 import { HiOutlineExternalLink } from "react-icons/hi";
+import isAdmin from "../utils/isAdmin";
 
-const UserMenu = ({close}) => {
+const UserMenu = ({ close }) => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -20,44 +21,84 @@ const UserMenu = ({close}) => {
       console.log("logout", response);
 
       if (response.data.success) {
-        if(close){
-          close()
+        if (close) {
+          close();
         }
         dispatch(logout());
         localStorage.clear();
-        toast.success(response.data.message); 
+        toast.success(response.data.message);
         navigate("/");
       }
     } catch (error) {
       console.log(error);
-      toast.error("Logout failed. Please try again."); 
+      toast.error("Logout failed. Please try again.");
     }
   };
-  const handleClose = ()=>{
-    if(close){
-      close()
+  const handleClose = () => {
+    if (close) {
+      close();
     }
- }
+  };
 
   return (
     <div className="items-center">
       <div className="font-semibold">My Account</div>
-      <div className='text-sm flex items-center gap-2 mt-1'>
-          <span className='max-w-52 text-ellipsis line-clamp-1'>{user.name.toUpperCase() || user.mobile} <span className='text-medium text-red-600'>{user.role === "ADMIN" ? "(Admin)" : "" }</span></span>
-          <Link onClick={handleClose} to={"/dashboard/profile"} className='hover:text-primary-200'>
-            <HiOutlineExternalLink size={15}/>
-          </Link>
-        </div>
+      <div className="text-sm flex items-center gap-2 mt-1">
+        <span className="max-w-52 text-ellipsis line-clamp-1">
+          {user.name.toUpperCase() || user.mobile}{" "}
+          <span className="text-medium text-red-600">
+            {user.role === "ADMIN" ? "(Admin)" : ""}
+          </span>
+        </span>
+        <Link
+          onClick={handleClose}
+          to={"/dashboard/profile"}
+          className="hover:text-primary-200"
+        >
+          <HiOutlineExternalLink size={15} />
+        </Link>
+      </div>
       <Divider />
       <div className="text-sm grid gap-1">
+      {
+              isAdmin(user.role) && (
+                <Link onClick={handleClose} to={"/dashboard/category"} className='px-2 hover:bg-orange-200 py-1'>Category</Link>
+              )
+            }
 
-        <Link to={"/dashboard/category"} className="px-2 hover:bg-orange-200 py-1">Category</Link>
-        <Link to={"/dashboard/subcategory"} className="px-2 hover:bg-orange-200 py-1">Sub Category</Link>
-        <Link to={"/dashboard/upload-product"} className="px-2 hover:bg-orange-200 py-1">Upload Product</Link>
-        <Link to={"/dashboard/product"} className="px-2 hover:bg-orange-200 py-1">Products</Link>
-        <Link to={"/dashboard/myorders"} className="px-2 hover:bg-orange-200 py-1">My Orders</Link>
-        <Link to={"/dashboard/address"} className="px-2 hover:bg-orange-200 py-1">Save Address</Link>
-        <button onClick={handleLogout} className="text-left px-2 hover:bg-orange-200 py-1">
+            {
+              isAdmin(user.role) && (
+                <Link onClick={handleClose} to={"/dashboard/subcategory"} className='px-2 hover:bg-orange-200 py-1'>Sub Category</Link>
+              )
+            }
+
+            {
+              isAdmin(user.role) && (
+                <Link onClick={handleClose} to={"/dashboard/upload-product"} className='px-2 hover:bg-orange-200 py-1'>Upload Product</Link>
+              )
+            }
+
+            {
+              isAdmin(user.role) && (
+                <Link onClick={handleClose} to={"/dashboard/product"} className='px-2 hover:bg-orange-200 py-1'>Product</Link>
+              )
+            }
+        <Link
+          to={"/dashboard/myorders"}
+          className="px-2 hover:bg-orange-200 py-1"
+        >
+          My Orders
+        </Link>
+        <Link
+          to={"/dashboard/address"}
+          className="px-2 hover:bg-orange-200 py-1"
+        >
+          Save Address
+        </Link>
+        <button
+          onClick={handleLogout}
+          className="text-left px-2 hover:bg-orange-200 py-1"
+        >
           Logout
         </button>
       </div>
