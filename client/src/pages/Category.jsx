@@ -47,7 +47,7 @@ const Category = () => {
             })
 
             const { data: responseData } = response
-            console.log("from delte",response)
+            console.log("from delte",responseData)
 
             if (responseData.success) {
                 toast.success(responseData.message)
