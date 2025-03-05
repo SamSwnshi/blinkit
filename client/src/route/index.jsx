@@ -1,5 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import AdminPermision from "../layout/AdminPermisssion";
 
 import App from "../App";
 import Home from "../pages/Home";
@@ -39,42 +40,58 @@ const router = createBrowserRouter([
       },
       {
         path: "user",
-        element: <UserMenuPage/>
+        element: <UserMenuPage />,
       },
       {
         path: "dashboard",
-        element: <Dashboard/>,
+        element: <Dashboard />,
         children: [
           {
             path: "profile",
-            element: <Profile/>
+            element: <Profile />,
           },
           {
             path: "address",
-            element: <SaveAddress/>
+            element: <SaveAddress />,
           },
           {
             path: "myorders",
-            element: <MyOrder/>
+            element: <MyOrder />,
           },
           {
             path: "category",
-            element: <Category/>
-          }
-          ,{
+            element: (
+              <AdminPermision>
+                <Category />
+              </AdminPermision>
+            ),
+          },
+          {
             path: "subcategory",
-            element: <SubCategory/>
+            element: (
+              <AdminPermision>
+                <SubCategory />
+              </AdminPermision>
+            ),
           },
           {
             path: "upload-product",
-            element: <UploadProduct/>
+            element: (
+              <AdminPermision>
+                <UploadProduct />
+              </AdminPermision>
+            ),
           },
           {
             path: "product",
-            element: <ProductAdmin/>
-          }
-        ]
-      }
+            element: (
+              <AdminPermision>
+                <ProductAdmin />
+              </AdminPermision>
+            ),
+          },
+        ],
+      },
     ],
   },
 ]);

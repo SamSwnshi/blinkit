@@ -6,6 +6,7 @@ import EditCategory from '../components/EditCategory'
 import CofirmBox from '../components/CofirmBox'
 import toast from 'react-hot-toast'
 import AxiosToastError from '../utils/AxiosError'
+import { useSelector } from 'react-redux'
 
 const Category = () => {
     const [openUploadCategory, setOpenUploadCategory] = useState(false)
@@ -20,6 +21,12 @@ const Category = () => {
         name: "",
         image: "",
     })
+
+    // const allCategory = useSelector(state => state.product.allCategory)
+
+    // useEffect(()=>{
+    //     setCategoryData(allCategory)
+    // },[allCategory])
     const fetchCategory = async () => {
         try {
             const response = await Axios({
