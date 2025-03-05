@@ -7,7 +7,8 @@ import config from "./db/config.js";
 import userRoutes from "./routes/user.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
-import subCategoryRoutes from "./routes/subCategory.routes.js"
+import subCategoryRoutes from "./routes/subCategory.routes.js";
+import productRoutes from "./routes/product.routes.js"
 dotenv.config()
 
 
@@ -30,6 +31,7 @@ app.use("/api/user",userRoutes);
 app.use("/api/category",categoryRoutes);
 app.use("/api/file",uploadRoutes)
 app.use("/api/subcategory",subCategoryRoutes)
+app.use("/api/product",productRoutes)
 
 app.listen(port,()=>{
     console.log(`Server is Running on Port: ${port}`)
