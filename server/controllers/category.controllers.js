@@ -1,5 +1,6 @@
 import CategoryModel from "../models/category.models.js";
-import SubCategoryModel from "../models/subCategory.models.js"
+import SubCategoryModel from "../models/subCategory.models.js";
+import ProductModel from "../models/product.models.js"
 
 export const addCategory = async (req, res) => {
   try {
@@ -21,14 +22,14 @@ export const addCategory = async (req, res) => {
     const saveCategory = await addCategory.save();
 
     if (!saveCategory) {
-      return response.status(500).json({
+      return res.status(500).json({
         message: "Not Created",
         error: true,
         success: false,
       });
     }
 
-    return response.json({
+    return res.json({
       message: "Add Category",
       data: saveCategory,
       success: true,

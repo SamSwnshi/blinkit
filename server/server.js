@@ -6,7 +6,8 @@ import helmet from "helmet";
 import config from "./db/config.js";
 import userRoutes from "./routes/user.routes.js";
 import categoryRoutes from "./routes/category.routes.js";
-import uploadRoutes from "./routes/upload.routes.js"
+import uploadRoutes from "./routes/upload.routes.js";
+import subCategoryRoutes from "./routes/subCategory.routes.js"
 dotenv.config()
 
 
@@ -28,6 +29,7 @@ app.use(helmet({
 app.use("/api/user",userRoutes);
 app.use("/api/category",categoryRoutes);
 app.use("/api/file",uploadRoutes)
+app.use("/api/subcategory",subCategoryRoutes)
 
 app.listen(port,()=>{
     console.log(`Server is Running on Port: ${port}`)
