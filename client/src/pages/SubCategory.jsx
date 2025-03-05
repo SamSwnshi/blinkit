@@ -10,6 +10,9 @@ import { LuPencil } from "react-icons/lu";
 import { MdDelete } from "react-icons/md";
 import { HiPencil } from "react-icons/hi";
 import ViewImage from "../components/ViewImage";
+import EditSubCategory from "../components/EditSubCategory";
+import toast from 'react-hot-toast'
+import CofirmBox from "../components/CofirmBox"
 
 const SubCategory = () => {
   const [openAddSubCategory, setOpenAddSubCategory] = useState(false);
@@ -77,10 +80,7 @@ const SubCategory = () => {
           <>
             {row.original.category.map((c, index) => {
               return (
-                <p
-                  key={c._id + "table"}
-                  className=" px-1 inline-block "
-                >
+                <p key={c._id + "table"} className=" px-1 inline-block ">
                   {c.name}
                 </p>
               );
@@ -117,6 +117,26 @@ const SubCategory = () => {
       },
     }),
   ];
+
+  const handleDeleteSubCategory = async()=>{
+    try {
+        const response = await Axios({
+            ...SummaryApi.deleteSubCategory,
+            data : deleteSubCategory
+        })
+
+        const { data : responseData } = response
+
+        if(responseData.success){
+           toast.success(responseData.message)
+           fetchSubCategory()
+           setOpenDeleteConfirmBox(false)
+           setDeleteSubCategory({_id : ""})
+        }
+    } catch (error) {
+      AxiosToastError(error)
+    }
+}
   return (
     <section>
       <div className="p-2  shadow-md flex items-center justify-between ">
@@ -143,9 +163,27 @@ const SubCategory = () => {
         />
       )}
 
+      {ImageURL && <ViewImage url={ImageURL} close={() => setImageURL("")} />}
+
       {
-        ImageURL && <ViewImage url={ImageURL} close={()=>setImageURL("")}/>
+      openEdit && (
+        <EditSubCategory
+          data={editData}
+          close={() => setOpenEdit(false)}
+          fetchData={fetchSubCategory}
+        />
+      )
       }
+
+{
+          openDeleteConfirmBox && (
+            <CofirmBox 
+              cancel={()=>setOpenDeleteConfirmBox(false)}
+              close={()=>setOpenDeleteConfirmBox(false)}
+              confirm={handleDeleteSubCategory}
+            />
+          )
+        }
     </section>
   );
 };
