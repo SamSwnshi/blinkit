@@ -5,14 +5,15 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { ToastContainer, toast } from 'react-toastify';
 import fetchUserDetails from "./utils/fetchUserDetails";
-import { setUserDetails } from "./store/userSlice";
+import { setUserDetails} from "./store/userSlice";
 import { useDispatch } from "react-redux";
 import Axios from "./utils/config";
 import SummaryApi from "./common/SummaryApi";
-import { setAllCategory } from "./store/productSlice";
+import { setAllCategory ,setAllSubCategory} from "./store/productSlice";
 
 const App = () => {
   const dispatch = useDispatch();
+
   const fetchUser = async () => {
     const userData = await fetchUserDetails();
     dispatch(setUserDetails(userData.data))
@@ -33,9 +34,24 @@ const App = () => {
             console.log(error)
         }
     }
+    const fetchSubCategory = async()=>{
+      try {
+          const response = await Axios({
+              ...SummaryApi.getSubCategory
+          })
+          const { data : responseData } = response
+  
+          if(responseData.success){
+             dispatch(setAllSubCategory(responseData.data.sort((a, b) => a.name.localeCompare(b.name)))) 
+          }
+      } catch (error) {
+        console.log(error)
+      }
+    }
 
 
     useEffect(() => {
+      fetchSubCategory()
     fetchCategory()
     fetchUser()
   }, [])
