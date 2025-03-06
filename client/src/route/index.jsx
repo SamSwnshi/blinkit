@@ -1,7 +1,6 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import AdminPermision from "../layout/AdminPermisssion";
-
 import App from "../App";
 import Home from "../pages/Home";
 import SearchPage from "../pages/SearchPage";

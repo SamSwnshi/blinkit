@@ -66,7 +66,7 @@ const SummaryApi = {
     method: "post",
   },
   getProduct: {
-    url: "/api/product/getProduct",
+    url: "/api/product/get",
     method: "get",
   },
   getProductByCategory: {
@@ -82,15 +82,15 @@ const SummaryApi = {
     method: "post",
   },
   updateProductDetails: {
-    url: "/api/product/updateProduct",
+    url: "/api/product/update-product",
     method: "put",
   },
   deleteProduct: {
-    url: "/api/product/deleteProduct",
+    url: "/api/product/delete-product",
     method: "delete",
   },
   searchProduct: {
-    url: "/api/product/getProductSearch",
+    url: "/api/product/search-product",
     method: "post",
   },
 };
