@@ -6,14 +6,14 @@ import { createProduct, getProduct, getProductCategory, getProductCategorySubCat
 
 const router = Router();
 
-router.post("/create", auth, admin, createProduct);
+router.post("/create", auth,  createProduct);
 router.get("/get", getProduct);
 router.post("/get-product-by-category", getProductCategory);
 router.post("/get-product-by-category-and-subcategory", getProductCategorySubCategory);
 router.post("/get-product-details,", getProductDetails);
 
-router.put("/update-product", auth, admin, updateProduct);
-router.delete("/delete-product", auth, admin, deleteProduct);
-router.post("/search-product", auth, admin, getProductSearch);
+router.put("/update-product", auth,  updateProduct);
+router.delete("/delete-product", auth,  deleteProduct);
+router.post("/search-product", auth,  getProductSearch);
 
 export default router;
