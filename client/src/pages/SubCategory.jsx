@@ -160,6 +160,7 @@ const SubCategory = () => {
           close={() => {
             setOpenAddSubCategory(false);
           }}
+          fetchData={fetchSubCategory}
         />
       )}
 

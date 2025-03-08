@@ -7,7 +7,7 @@ import AxiosToastError from "../utils/AxiosError.js"
 import SummaryApi from "../common/SummaryApi";
 import Axios from "../utils/config.js";
 
-const UploadSubCategory = ({ close }) => {
+const UploadSubCategory = ({ close,fetchData }) => {
     const [subCategoryData, setSubCategoryData] = useState({
         name: "",
         image: "",
@@ -76,9 +76,9 @@ const UploadSubCategory = ({ close }) => {
                 if(close){
                     close()
                 }
-                // if(fetchData){
-                //     fetchData()
-                // }
+                if(fetchData){
+                    fetchData()
+                }
             }
 
         } catch (error) {
