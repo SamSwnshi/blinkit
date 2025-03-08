@@ -70,7 +70,7 @@ const SummaryApi = {
     method: "get",
   },
   getProductByCategory: {
-    url: "/api/product/getProductCategory",
+    url: "/api/product/get-product-by-category",
     method: "post",
   },
   getProductByCategoryAndSubCategory: {
