@@ -10,7 +10,8 @@ import uploadRoutes from "./routes/upload.routes.js";
 import subCategoryRoutes from "./routes/subCategory.routes.js";
 import productRoutes from "./routes/product.routes.js";
 import cartRoutes from "./routes/cart.routes.js";
-import addressRoutes from "./routes/address.routes.js"
+import addressRoutes from "./routes/address.routes.js";
+import orderRoutes from "./routes/order.routes.js"
 dotenv.config()
 
 
@@ -35,7 +36,8 @@ app.use("/api/file",uploadRoutes)
 app.use("/api/subcategory",subCategoryRoutes)
 app.use("/api/product",productRoutes)
 app.use("/api/cart",cartRoutes)
-api.use("/api/address",addressRoutes)
+app.use("/api/address",addressRoutes)
+app.use("/api/order",orderRoutes)
 
 
 app.listen(port,()=>{
