@@ -3,13 +3,14 @@ import { Link } from 'react-router-dom'
 import AddToCartButton from './AddToCartButton'
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupess'
 import { pricewithDiscount } from '../utils/PriceWithDiscout'
+import { valideURLConvert } from '../utils/validateURLConvert'
 
 const CardProduct = ({ data }) => {
     console.log("card", data)
-    // const url = `/product/${valideURLConvert(data.name)}-${data._id}`
-    // const [loading,setLoading] = useState(false)
+    const url = `/product/${valideURLConvert(data.name)}-${data._id}`
+    const [loading,setLoading] = useState(false)
     return (
-        <Link  className='border py-2 lg:p-4 grid gap-1 lg:gap-3 min-w-36 lg:min-w-52 rounded cursor-pointer bg-white' >
+        <Link to={url} className='border py-2 lg:p-4 grid gap-1 lg:gap-3 min-w-36 lg:min-w-52 rounded cursor-pointer bg-white' >
         <div className='min-h-20 w-full max-h-24 lg:max-h-32 rounded overflow-hidden'>
               <img 
                   src={data.image[0]}
