@@ -7,13 +7,12 @@ import UserModel from "../models/user.models.js";
         const user = await UserModel.findById(userId);
 
         if(user.role !== 'ADMIN'){
-            return resp.status(400).json({
+            return res.status(400).json({
                 message : "Permission denial",
                 error : true,
                 success : false
             })
        }
-
        next()
         
     } catch (error) {
