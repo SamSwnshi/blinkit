@@ -74,11 +74,11 @@ const SummaryApi = {
     method: "post",
   },
   getProductByCategoryAndSubCategory: {
-    url: "/api/product/getProductCategorySubCategory",
+    url: "/api/product/get-product-by-category-and-subcategory",
     method: "post",
   },
   getProductDetails: {
-    url: "/api/product/getProductDetails",
+    url: "/api/product/get-product-details",
     method: "post",
   },
   updateProductDetails: {

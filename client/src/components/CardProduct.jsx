@@ -6,7 +6,7 @@ import { pricewithDiscount } from '../utils/PriceWithDiscout'
 import { valideURLConvert } from '../utils/validateURLConvert'
 
 const CardProduct = ({ data }) => {
-    console.log("card", data)
+    // console.log("card", data)
     const url = `/product/${valideURLConvert(data.name)}-${data._id}`
     const [loading,setLoading] = useState(false)
     return (
