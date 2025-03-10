@@ -181,7 +181,19 @@ export const getProductDetails = async(req,res) =>{
     try {
         const { productId } = req.body 
 
-        const product = await ProductModel.findOne({ _id : productId })
+        console.log("REceived Product Id", productId)
+
+        if (!productId) {
+            return res.status(400).json({
+                message: "Product ID is required",
+                error: true,
+                success: false
+            });
+        }
+
+        // const product = await ProductModel.findOne({ _id : productId })
+
+        const product = await ProductModel.findById(productId);
 
 
         return res.json({
