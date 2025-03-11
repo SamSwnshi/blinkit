@@ -5,11 +5,12 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { ToastContainer, toast } from 'react-toastify';
 import fetchUserDetails from "./utils/fetchUserDetails";
-import { setUserDetails} from "./store/userSlice";
+import { setUserDetails } from "./store/userSlice";
 import { useDispatch } from "react-redux";
 import Axios from "./utils/config";
 import SummaryApi from "./common/SummaryApi";
-import { setAllCategory ,setAllSubCategory, setLoadingCategory} from "./store/productSlice";
+import { setAllCategory, setAllSubCategory, setLoadingCategory } from "./store/productSlice";
+import GlobalProvider from './provider/GlobalProvider';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,53 +21,53 @@ const App = () => {
   }
 
   const fetchCategory = async () => {
-        try {
-          dispatch(setLoadingCategory(true))
-            const response = await Axios({
-                ...SummaryApi.getCategory
-            })
-            const { data: responseData } = response;
-            if (responseData.success) {
-              // console.log("data from api",responseData.data)
-              dispatch(setAllCategory(responseData.data))
-                
-            }
-        } catch (error) {
-            console.log(error)
-        }finally{
-          dispatch(setLoadingCategory(false))
-        }
-    }
-    const fetchSubCategory = async()=>{
-      try {
-          const response = await Axios({
-              ...SummaryApi.getSubCategory
-          })
-          const { data : responseData } = response
-  
-          if(responseData.success){
-             dispatch(setAllSubCategory(responseData.data.sort((a, b) => a.name.localeCompare(b.name)))) 
-          }
-      } catch (error) {
-        console.log(error)
+    try {
+      dispatch(setLoadingCategory(true))
+      const response = await Axios({
+        ...SummaryApi.getCategory
+      })
+      const { data: responseData } = response;
+      if (responseData.success) {
+        // console.log("data from api",responseData.data)
+        dispatch(setAllCategory(responseData.data))
+
       }
+    } catch (error) {
+      console.log(error)
+    } finally {
+      dispatch(setLoadingCategory(false))
     }
+  }
+  const fetchSubCategory = async () => {
+    try {
+      const response = await Axios({
+        ...SummaryApi.getSubCategory
+      })
+      const { data: responseData } = response
+
+      if (responseData.success) {
+        dispatch(setAllSubCategory(responseData.data.sort((a, b) => a.name.localeCompare(b.name))))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
 
 
-    useEffect(() => {
-      fetchSubCategory()
+  useEffect(() => {
+    fetchSubCategory()
     fetchCategory()
     fetchUser()
   }, [])
   return (
-    <>
+    <GlobalProvider>
       <Header />
       <main className="min-h-[80vh]">
         <Outlet />
       </main>
       <Footer />
-      <ToastContainer  position="top-center" autoClose={3000} />
-    </>
+      <ToastContainer position="top-center" autoClose={3000} />
+    </GlobalProvider>
   );
 };
 

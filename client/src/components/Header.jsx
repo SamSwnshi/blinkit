@@ -1,22 +1,29 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import Search from "./Search";
-import { Link, Links, useLocation, useNavigate } from "react-router-dom";
+import { Link,  useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import useMobile from "../hooks/useMobile";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import UserMenu from "./UserMenu";
+import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupess';
+import { useGlobalContext } from '../provider/GlobalProvider';
+// import DisplayCartItem from './DisplayCartItem';
 
 const Header = () => {
   const [openCartSection, setOpenCartSection] = useState(false);
+  const cartItem = useSelector(state => state.cartItem.cart)
   const [openUserMenu, setOpenUserMenu] = useState(false);
   const isMobile = useMobile();
   const navigate = useNavigate();
   const location = useLocation();
   const isSearchPage = location.pathname === "/search";
   const user = useSelector((state) => state?.user);
+  const { totalPrice, totalQty} = useGlobalContext()
+
+  console.log("Totoal Price",totalPrice)
 
 
   const redirectToLoginPage = () => {
@@ -103,7 +110,16 @@ const Header = () => {
                   <BsCart4 size={30} />
                 </div>
                 <div className="font-semibold">
-                  <p>My Cart</p>
+                {
+                                                    cartItem[0] ? (
+                                                        <div>
+                                                            <p>{totalQty} Items</p>
+                                                            <p>{DisplayPriceInRupees(totalPrice)}</p>
+                                                        </div>
+                                                    ) : (
+                                                        <p>My Cart</p>
+                                                    )
+                                                }
                 </div>
               </button>
             </div>
