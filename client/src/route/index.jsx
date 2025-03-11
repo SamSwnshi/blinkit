@@ -9,7 +9,6 @@ import Register from "../pages/Register";
 import UserMenuPage from "../pages/UserMenuPage";
 import Dashboard from "../layout/Dashboard";
 import Profile from "../pages/Profile";
-import SaveAddress from "../pages/SaveAddress";
 import MyOrder from "../pages/MyOrder";
 import Category from "../pages/Category";
 import SubCategory from "../pages/SubCategory";
@@ -17,6 +16,11 @@ import UploadProduct from "../pages/UploadProduct";
 import ProductAdmin from "../pages/ProductAdmin";
 import ProductDisplayPage from "../pages/ProductDisplayPage";
 import ProductListPage from "../pages/ProductListPage";
+import CartMobile from "../components/CartMobile";
+import CheckoutPage from "../pages/CheckoutPage";
+import Success from "../pages/Success";
+import Cancel from "../pages/Cancel";
+import Address from "../pages/Address";
 
 const router = createBrowserRouter([
   {
@@ -53,7 +57,7 @@ const router = createBrowserRouter([
           },
           {
             path: "address",
-            element: <SaveAddress />,
+            element: <Address />,
           },
           {
             path: "myorders",
@@ -105,7 +109,23 @@ const router = createBrowserRouter([
       {
         path: "product/:product",
         element: <ProductDisplayPage/>
-      }
+      },
+      {
+        path : 'cart',
+        element : <CartMobile/>
+    },
+    {
+        path : "checkout",
+        element : <CheckoutPage/>
+    },
+    {
+        path : "success",
+        element : <Success/>
+    },
+    {
+        path : 'cancel',
+        element : <Cancel/>
+    }
     ],
   },
 ]);

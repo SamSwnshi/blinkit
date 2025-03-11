@@ -105,7 +105,7 @@ const Header = () => {
                 </button>
               )}
 
-              <button className="cursor-pointer flex items-center gap-3 px-3 py-2 bg-green-800 hover:bg-green-700 rounded-md text-white">
+              <button onClick={()=>setOpenCartSection(true)} className="cursor-pointer flex items-center gap-3 px-3 py-2 bg-green-800 hover:bg-green-700 rounded-md text-white">
                 <div className="animate-bounce">
                   <BsCart4 size={30} />
                 </div>
