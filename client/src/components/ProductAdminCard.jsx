@@ -7,7 +7,7 @@ import AxiosToastError from "../utils/AxiosError";
 import EditProductAdmin from "./EditProductAdmin";
 
 const ProductAdminCard = ({ data, fetchProductData }) => {
-
+    console.log("Fetched Product",data)
     const [editOpen, setEditOpen] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
 

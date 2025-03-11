@@ -53,7 +53,7 @@ const Login = () => {
 
                 setData({ email: "", password: "" });
 
-                setTimeout(() => navigate("/"), 1500); // ✅ Delay navigation slightly
+                setTimeout(() => navigate("/"), 1000); 
             }
         } catch (error) {
             AxiosToastError(error); // ✅ Show API error
