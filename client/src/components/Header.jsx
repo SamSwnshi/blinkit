@@ -10,7 +10,7 @@ import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import UserMenu from "./UserMenu";
 import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupess';
 import { useGlobalContext } from '../provider/GlobalProvider';
-// import DisplayCartItem from './DisplayCartItem';
+import DisplayCartItem from './DisplayCartItem';
 
 const Header = () => {
   const [openCartSection, setOpenCartSection] = useState(false);
@@ -130,6 +130,13 @@ const Header = () => {
       <div className="container mx-auto px-2 lg:hidden">
         <Search />
       </div>
+
+      
+      {
+            openCartSection && (
+                <DisplayCartItem close={()=>setOpenCartSection(false)}/>
+            )
+        }
     </header>
   );
 };
