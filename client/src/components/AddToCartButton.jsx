@@ -60,9 +60,9 @@ const AddToCartButton = ({ data }) => {
   const increaseQty = async (e) => {
     e.preventDefault();
     e.stopPropagation();
-
+   
     const response = await updateCartItem(cartItemDetails?._id, qty + 1);
-
+   
     if (response.success) {
       toast.success("Item added");
     }

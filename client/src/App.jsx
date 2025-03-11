@@ -3,62 +3,69 @@ import "./App.css";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import { ToastContainer, toast } from 'react-toastify';
+import toast, { Toaster } from "react-hot-toast";
 import fetchUserDetails from "./utils/fetchUserDetails";
 import { setUserDetails } from "./store/userSlice";
 import { useDispatch } from "react-redux";
 import Axios from "./utils/config";
 import SummaryApi from "./common/SummaryApi";
-import { setAllCategory, setAllSubCategory, setLoadingCategory } from "./store/productSlice";
-import GlobalProvider from './provider/GlobalProvider';
+import {
+  setAllCategory,
+  setAllSubCategory,
+  setLoadingCategory,
+} from "./store/productSlice";
+import GlobalProvider from "./provider/GlobalProvider";
+import CartMobileLink from "./components/CartMobile"
 
 const App = () => {
   const dispatch = useDispatch();
 
   const fetchUser = async () => {
     const userData = await fetchUserDetails();
-    dispatch(setUserDetails(userData.data))
-  }
+    dispatch(setUserDetails(userData.data));
+  };
 
   const fetchCategory = async () => {
     try {
-      dispatch(setLoadingCategory(true))
+      dispatch(setLoadingCategory(true));
       const response = await Axios({
-        ...SummaryApi.getCategory
-      })
+        ...SummaryApi.getCategory,
+      });
       const { data: responseData } = response;
       if (responseData.success) {
         // console.log("data from api",responseData.data)
-        dispatch(setAllCategory(responseData.data))
-
+        dispatch(setAllCategory(responseData.data));
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     } finally {
-      dispatch(setLoadingCategory(false))
+      dispatch(setLoadingCategory(false));
     }
-  }
+  };
   const fetchSubCategory = async () => {
     try {
       const response = await Axios({
-        ...SummaryApi.getSubCategory
-      })
-      const { data: responseData } = response
+        ...SummaryApi.getSubCategory,
+      });
+      const { data: responseData } = response;
 
       if (responseData.success) {
-        dispatch(setAllSubCategory(responseData.data.sort((a, b) => a.name.localeCompare(b.name))))
+        dispatch(
+          setAllSubCategory(
+            responseData.data.sort((a, b) => a.name.localeCompare(b.name))
+          )
+        );
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
-
+  };
 
   useEffect(() => {
-    fetchSubCategory()
-    fetchCategory()
-    fetchUser()
-  }, [])
+    fetchSubCategory();
+    fetchCategory();
+    fetchUser();
+  }, []);
   return (
     <GlobalProvider>
       <Header />
@@ -66,7 +73,13 @@ const App = () => {
         <Outlet />
       </main>
       <Footer />
-      <ToastContainer position="top-center" autoClose={3000} />
+      <Toaster />
+
+      {
+        location.pathname !== '/checkout' && (
+          <CartMobileLink/>
+        )
+      }
     </GlobalProvider>
   );
 };
