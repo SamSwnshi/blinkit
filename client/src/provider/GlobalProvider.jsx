@@ -58,6 +58,8 @@ const GlobalProvider = ({ children }) => {
       return error;
     }
   };
+
+
   const deleteCartItem = async (cartId) => {
     try {
       const response = await Axios({
@@ -76,6 +78,8 @@ const GlobalProvider = ({ children }) => {
       AxiosToastError(error);
     }
   };
+
+  
 
   useEffect(() => {
     const qty = cartItem.reduce((preve, curr) => {
@@ -99,9 +103,17 @@ const GlobalProvider = ({ children }) => {
     setNotDiscountTotalPrice(notDiscountPrice);
   }, [cartItem]);
 
+  const handleLogoutOut = () => {
+    // localStorage.clear()
+    dispatch(handleAddItemCart([]))
+  }
+
   useEffect(() => {
     fetchCartItem();
+    handleLogoutOut()
   }, [user]);
+
+
   return (
     <GlobalContext.Provider
       value={{
