@@ -21,6 +21,7 @@ const CheckoutPage = () => {
   return (
     <section className='bg-blue-50'>
       <div className='container mx-auto p-4 flex flex-col lg:flex-row w-full gap-5 justify-between'>
+        
         <div className='w-full'>
           {/***address***/}
           <h3 className='text-lg font-semibold'>Choose your address</h3>

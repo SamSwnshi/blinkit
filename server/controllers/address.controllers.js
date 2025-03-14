@@ -4,7 +4,7 @@ import UserModel from "../models/user.models.js";
 export const addAddress = async(req , res) =>{
     try {
         const userId = req.userId // middleware
-        const { address_line , city, state, pincode, country,mobile } = request.body
+        const { address_line , city, state, pincode, country,mobile } = req.body
 
         const createAddress = new AddressModel({
             address_line,
