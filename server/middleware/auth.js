@@ -9,7 +9,8 @@ const auth = async(req,res,next) =>{
             return res.status(401).json({ message: "Access Denied! No Token Provided" });
         }
 
-        const decoded  = await jwt.verify(token,process.env.JWT_KEY);
+        const decoded  =  jwt.verify(token,process.env.JWT_KEY);
+        console.log("Decoded Token:", decoded);
         req.user = decoded 
         next()
     } catch (error) {

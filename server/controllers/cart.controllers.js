@@ -3,7 +3,7 @@ import UserModel from "../models/user.models.js";
 
 export const addToCart = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
     const { productId } = req.body;
 
     if (!productId) {
@@ -57,7 +57,7 @@ export const addToCart = async (req, res) => {
 };
 export const getCartItems = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
 
     const cartItem = await CartProductModel.find({
       userId: userId,
@@ -78,7 +78,7 @@ export const getCartItems = async (req, res) => {
 };
 export const updateCart = async (req, res) => {
   try {
-    const userId = req.userId;
+    const userId = req.user.id;
     const { _id, qty } = req.body;
 
     if (!_id || !qty) {
@@ -113,7 +113,7 @@ export const updateCart = async (req, res) => {
 };
 export const deleteItems = async (req, res) => {
   try {
-    const userId = req.userId; // middleware
+    const userId = req.user.id; // middleware
     const { _id } = req.body;
 
     if (!_id) {

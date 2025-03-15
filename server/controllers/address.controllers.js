@@ -3,8 +3,9 @@ import UserModel from "../models/user.models.js";
 
 export const addAddress = async(req , res) =>{
     try {
-        const userId = req.userId // middleware
+        const userId = req.user.id; // middleware
         const { address_line , city, state, pincode, country,mobile } = req.body
+        console.log("from add aadress",userId)
 
         const createAddress = new AddressModel({
             address_line,
@@ -15,6 +16,7 @@ export const addAddress = async(req , res) =>{
             mobile,
             userId : userId 
         })
+        console.log("Created Address",createAddress)
         const saveAddress = await createAddress.save();
 
         const addUserAddressId = await UserModel.findByIdAndUpdate(userId,{
@@ -22,6 +24,7 @@ export const addAddress = async(req , res) =>{
                 address_details : saveAddress._id
             }
         })
+        console.log("add Created Address",addUserAddressId)
 
         return res.json({
             message : "Address Created Successfully",
@@ -40,7 +43,7 @@ export const addAddress = async(req , res) =>{
 
 export const getAddress = async(req, res) =>{
     try {
-        const userId = req.userId;
+        const userId = req.user.id;
 
         const data = await AddressModel.find({ userId : userId }).sort({ createdAt : -1})
 
@@ -61,7 +64,7 @@ export const getAddress = async(req, res) =>{
 
 export const updateAddress = async(req ,res) =>{
     try {
-        const userId = req.userId // middleware auth 
+        const userId = req.user.id // middleware auth 
         const { _id, address_line,city,state,country,pincode, mobile } = request.body 
 
         const updateAddress = await AddressModel.updateOne({ _id : _id, userId : userId },{
@@ -91,7 +94,7 @@ export const updateAddress = async(req ,res) =>{
 
 export const deleteAddress = async(req ,res) =>{
     try {
-        const userId = req.userId // auth middleware    
+        const userId = req.user.id // auth middleware    
         const { _id } = req.body 
 
         const disableAddress = await AddressModel.updateOne({ _id : _id, userId},{

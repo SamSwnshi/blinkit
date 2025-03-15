@@ -110,7 +110,7 @@ export const login = async (req, res) => {
 };
 export const logout = async (req, res) => {
   try {
-    const userid = req.userId; //middleware
+    const userid = req.user.id; //middleware
 
     const cookiesOption = {
       httpOnly: true,

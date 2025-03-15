@@ -1,11 +1,15 @@
 import CartProductModel from "../models/cartproduct.models.js";
 import OrderModel from "../models/order.models.js";
 import UserModel from "../models/user.models.js";
+import mongoose from "mongoose";
+
 
 export const cashOnDelivery = async (req, res) => {
   try {
-    const userId = req.userId; // auth middleware
+    const userId = req.user.id; // auth middleware
     const { list_items, totalAmt, addressId, subTotalAmt } = req.body;
+  
+    
 
     const payload = list_items.map((el) => {
       return {
@@ -23,6 +27,7 @@ export const cashOnDelivery = async (req, res) => {
         totalAmt: totalAmt,
       };
     });
+    console.log("Payload:", payload);
 
     const generatedOrder = await OrderModel.insertMany(payload);
 
