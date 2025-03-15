@@ -122,9 +122,13 @@ const SummaryApi = {
     method: "put",
   },
   disableAddress: {
-    url: "/api/address/disable",
+    url: "/api/address/delete",
     method: "delete",
   },
+  CashOnDeliveryOrder : {
+    url : "/api/order/cash-on-delivery",
+    method : 'post'
+},
 };
 
 export default SummaryApi;

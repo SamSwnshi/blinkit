@@ -12,13 +12,47 @@ import { useNavigate } from 'react-router-dom';
 
 const CheckoutPage = () => {
 
-  const { notDiscountTotalPrice, totalPrice, totalQty, fetchCartItem, fetchOrder } = useGlobalContext()
+  const { notDiscountTotalPrice, totalPrice, totalQty, fetchCartItem } = useGlobalContext()
   const [openAddress, setOpenAddress] = useState(false)
   const addressList = useSelector(state => state.addresses.addressList)
   console.log(addressList)
   const [selectAddress, setSelectAddress] = useState(0)
   const cartItemsList = useSelector(state => state.cartItem.cart)
   const navigate = useNavigate();
+
+  const handleCashOnDelivery = async() => {
+    try {
+        const response = await Axios({
+          ...SummaryApi.CashOnDeliveryOrder,
+          data : {
+            list_items : cartItemsList,
+            addressId : addressList[selectAddress]?._id,
+            subTotalAmt : totalPrice,
+            totalAmt :  totalPrice,
+          }
+        })
+
+        const { data : responseData } = response
+
+        if(responseData.success){
+            toast.success(responseData.message)
+            if(fetchCartItem){
+              fetchCartItem()
+            }
+            // if(fetchOrder){
+            //   fetchOrder()
+            // }
+            navigate('/success',{
+              state : {
+                text : "Order"
+              }
+            })
+        }
+
+    } catch (error) {
+      AxiosToastError(error)
+    }
+}
   return (
     <section className='bg-blue-50'>
       <div className='container mx-auto p-4 flex flex-col lg:flex-row w-full gap-5 justify-between'>
@@ -78,7 +112,7 @@ const CheckoutPage = () => {
           <div className='w-full flex flex-col gap-4'>
             <button className='py-2 px-4 bg-green-600 hover:bg-green-700 rounded text-white font-semibold' >Online Payment</button>
 
-            <button className='py-2 px-4 border-2 border-green-600 font-semibold text-green-600 hover:bg-green-600 hover:text-white' >Cash on Delivery</button>
+            <button onClick={handleCashOnDelivery} className='py-2 px-4 border-2 border-green-600 font-semibold text-green-600 hover:bg-green-600 hover:text-white' >Cash on Delivery</button>
           </div>
         </div>
       </div>
