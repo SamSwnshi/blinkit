@@ -25,7 +25,6 @@ export const cashOnDelivery = async (req, res) => {
         totalAmt: totalAmt,
       };
     });
-    console.log("Payload:", payload);
 
     const generatedOrder = await OrderModel.insertMany(payload);
 
@@ -61,8 +60,6 @@ export const payment = async (req, res) => {
   try {
     const userId = req.user.id; // auth middleware
     const { list_items, totalAmt, addressId, subTotalAmt } = req.body;
-
-    console.log("Received Payment Request:", req.body);
 
     const user = await UserModel.findById(userId);
 
@@ -103,7 +100,7 @@ export const payment = async (req, res) => {
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
 
-    console.log("Stripe Checkout Params:", JSON.stringify(params, null, 2));
+
 
     const session = await Stripe.checkout.sessions.create(params);
 
@@ -116,7 +113,7 @@ export const payment = async (req, res) => {
     });
   }
 };
-export const webhook = async (req, res) => {};
+
 export const getOrderProduct = async ({
   lineItems,
   userId,
@@ -151,23 +148,69 @@ export const getOrderProduct = async ({
 
   return productList;
 };
+
+export const webhook = async (req, res) => {
+  const event = req.body;
+  const endPointSecret = process.env.STRIPE_ENPOINT_WEBHOOK_SECRET_KEY;
+
+  console.log("event", event);
+
+  // Handle the event
+  switch (event.type) {
+    case "checkout.session.completed":
+      const session = event.data.object;
+      const lineItems = await Stripe.checkout.sessions.listLineItems(
+        session.id
+      );
+      const userId = session.metadata.userId;
+      console.log(userId,"from webhooke")
+      const orderProduct = await getOrderProduct({
+        lineItems: lineItems,
+        userId: userId,
+        addressId: session.metadata.addressId,
+        paymentId: session.payment_intent,
+        payment_status: session.payment_status,
+      });
+
+      const order = await OrderModel.insertMany(orderProduct);
+
+      console.log(order);
+      if (Boolean(order[0])) {
+        const removeCartItems = await UserModel.findByIdAndUpdate(userId, {
+          shopping_cart: [],
+        });
+        const removeCartProductDB = await CartProductModel.deleteMany({
+          userId: userId,
+        });
+      }
+      break;
+    default:
+      console.log(`Unhandled event type ${event.type}`);
+  }
+
+  // Return a response to acknowledge receipt of the event
+  res.json({ received: true });
+};
+
 export const getOrderDetails = async (req, res) => {
   try {
-    const userId = req.user.id // order id
+    const userId = req.user.id; // order id
 
-    const orderlist = await OrderModel.find({ userId : userId }).sort({ createdAt : -1 }).populate('delivery_address')
+    const orderlist = await OrderModel.find({ userId: userId })
+      .sort({ createdAt: -1 })
+      .populate("delivery_address");
 
     return res.json({
-        message : "order list",
-        data : orderlist,
-        error : false,
-        success : true
-    })
-} catch (error) {
+      message: "order list",
+      data: orderlist,
+      error: false,
+      success: true,
+    });
+  } catch (error) {
     return res.status(500).json({
-        message : error.message || error,
-        error : true,
-        success : false
-    })
-}
+      message: error.message || error,
+      error: true,
+      success: false,
+    });
+  }
 };
