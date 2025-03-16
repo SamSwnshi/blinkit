@@ -1,30 +1,29 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
 import Search from "./Search";
-import { Link,  useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaRegCircleUser } from "react-icons/fa6";
 import useMobile from "../hooks/useMobile";
 import { BsCart4 } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import { GoTriangleDown, GoTriangleUp } from "react-icons/go";
 import UserMenu from "./UserMenu";
-import { DisplayPriceInRupees } from '../utils/DisplayPriceInRupess';
-import { useGlobalContext } from '../provider/GlobalProvider';
-import DisplayCartItem from './DisplayCartItem';
+import { DisplayPriceInRupees } from "../utils/DisplayPriceInRupess";
+import { useGlobalContext } from "../provider/GlobalProvider";
+import DisplayCartItem from "./DisplayCartItem";
 
 const Header = () => {
   const [openCartSection, setOpenCartSection] = useState(false);
-  const cartItem = useSelector(state => state.cartItem.cart)
+  const cartItem = useSelector((state) => state.cartItem.cart);
   const [openUserMenu, setOpenUserMenu] = useState(false);
   const isMobile = useMobile();
   const navigate = useNavigate();
   const location = useLocation();
   const isSearchPage = location.pathname === "/search";
   const user = useSelector((state) => state?.user);
-  const { totalPrice, totalQty} = useGlobalContext()
+  const { totalPrice, totalQty } = useGlobalContext();
 
-  console.log("Totoal Price",totalPrice)
-
+  console.log("Totoal Price", totalPrice);
 
   const redirectToLoginPage = () => {
     navigate("/login");
@@ -41,11 +40,12 @@ const Header = () => {
     navigate("/user");
   };
   return (
-    <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 z-40 flex flex-col justify-center gap-1 bg-white ">
+    <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 bottom-0 z-40 flex flex-col justify-center gap-1 bg-white ">
       {!(isSearchPage && isMobile) && (
-        <div className="container mx-auto flex items-center px-2 justify-between ">
+        <div className="container -my-8 mx-auto flex items-center justify-between ">
+          {/**logo */}
           <div className="h-full">
-            <Link to={"/"} className="h-full ">
+            <Link to={"/"} className="h-full flex justify-center items-center">
               <img
                 src={logo}
                 width={170}
@@ -55,7 +55,7 @@ const Header = () => {
               />
               <img
                 src={logo}
-                width={170}
+                width={120}
                 height={60}
                 alt="logo"
                 className="lg:hidden"
@@ -63,21 +63,23 @@ const Header = () => {
             </Link>
           </div>
 
-          {/* //NOTE - search */}
+          {/**Search */}
           <div className="hidden lg:block">
             <Search />
           </div>
 
-          {/* //NOTE - login */}
-          <div>
+          {/**login and my cart */}
+          <div className="">
+            {/**user icons display in only mobile version**/}
             <button
               className="text-neutral-600 lg:hidden"
               onClick={handleMobile}
             >
-              <FaRegCircleUser size={30} />
+              <FaRegCircleUser size={26} />
             </button>
 
-            <div className="hidden lg:flex items-center gap-10 ">
+            {/**Desktop**/}
+            <div className="hidden lg:flex  items-center gap-10">
               {user?._id ? (
                 <div className="relative">
                   <div
@@ -104,22 +106,23 @@ const Header = () => {
                   Login
                 </button>
               )}
-
-              <button onClick={()=>setOpenCartSection(true)} className="cursor-pointer flex items-center gap-3 px-3 py-2 bg-green-800 hover:bg-green-700 rounded-md text-white">
+              <button
+                onClick={() => setOpenCartSection(true)}
+                className="flex items-center gap-2 bg-green-800 hover:bg-green-700 px-3 py-2 rounded text-white"
+              >
+                {/**add to card icons */}
                 <div className="animate-bounce">
-                  <BsCart4 size={30} />
+                  <BsCart4 size={26} />
                 </div>
-                <div className="font-semibold">
-                {
-                                                    cartItem[0] ? (
-                                                        <div>
-                                                            <p>{totalQty} Items</p>
-                                                            <p>{DisplayPriceInRupees(totalPrice)}</p>
-                                                        </div>
-                                                    ) : (
-                                                        <p>My Cart</p>
-                                                    )
-                                                }
+                <div className="font-semibold text-sm">
+                  {cartItem[0] ? (
+                    <div>
+                      <p>{totalQty} Items</p>
+                      <p>{DisplayPriceInRupees(totalPrice)}</p>
+                    </div>
+                  ) : (
+                    <p>My Cart</p>
+                  )}
                 </div>
               </button>
             </div>
@@ -131,12 +134,9 @@ const Header = () => {
         <Search />
       </div>
 
-      
-      {
-            openCartSection && (
-                <DisplayCartItem close={()=>setOpenCartSection(false)}/>
-            )
-        }
+      {openCartSection && (
+        <DisplayCartItem close={() => setOpenCartSection(false)} />
+      )}
     </header>
   );
 };
