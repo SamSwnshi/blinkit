@@ -33,7 +33,6 @@ const App = () => {
       });
       const { data: responseData } = response;
       if (responseData.success) {
-        // console.log("data from api",responseData.data)
         dispatch(setAllCategory(responseData.data));
       }
     } catch (error) {

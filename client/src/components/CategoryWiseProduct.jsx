@@ -28,8 +28,6 @@ const CategoryWiseProduct = ({ id, name }) => {
 
       const { data: responseData } = response;
 
-
-
       if (responseData.success) {
         setData(responseData.data);
       }

@@ -27,6 +27,7 @@ const GlobalProvider = ({ children }) => {
         ...SummaryApi.getCartItem,
       });
       const { data: responseData } = response;
+      console.log(responseData)
 
       if (responseData.success) {
         dispatch(handleAddItemCart(responseData.data));
