@@ -40,7 +40,7 @@ const Login = () => {
             });
 
             if (response.data.error) {
-                console.error(response.data.message); 
+                toast.error(response.data.message); 
                 return;
             }
 
@@ -97,13 +97,13 @@ const Login = () => {
 
                     <button
                         disabled={!isValid}
-                        className={`${isValid ? "bg-green-800 hover:bg-green-700" : "bg-gray-500"} text-white py-2 rounded font-semibold my-3 tracking-wide`}
+                        className={`${isValid ? "bg-green-500 hover:bg-blue-500" : "bg-gray-500"} text-white py-2 rounded font-semibold my-3 tracking-wide`}
                     >
                         Login
                     </button>
                 </form>
 
-                <p className='flex justify-center text-green-400'>
+                <p className='flex justify-center text-white'>
                     Don't have an account?  
                     <Link to={"/register"} className='font-semibold text-green-300 hover:text-white ml-1'>
                         Register
