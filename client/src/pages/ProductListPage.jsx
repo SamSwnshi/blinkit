@@ -75,7 +75,7 @@ const ProductListPage = () => {
     <section className="sticky top-24 mt-8 lg:top-20">
       <div className="container sticky top-24 mx-auto flex flex-col lg:flex-row gap-2 ">
         {/** Sub category **/}
-        <div className="min-h-[88vh] max-h-[88vh] overflow-y-scroll w-full lg:w-96 mt-2 grid gap-1 shadow-md scrollbarCustom bg-white  py-2">
+        <div className="min-h-[88vh] max-h-[88vh] overflow-y-scroll w-full lg:w-96 mt-2 grid gap-1 shadow-md scrollbarCustom   py-2">
           {DisplaySubCatory.map((s, index) => {
             const link = `/${valideURLConvert(s?.category[0]?.name)}-${
               s?.category[0]?._id
@@ -84,15 +84,15 @@ const ProductListPage = () => {
               <Link
                 to={link}
                 key={s._id}
-                className={`w-full p-2 lg:flex items-center lg:w-full lg:h-16 box-border lg:gap-4 border-b 
-            hover:bg-green-100 cursor-pointer
+                className={`w-full p-2 lg:flex  items-center lg:w-full lg:h-22 box-border lg:gap-4 border-b 
+            hover:bg-green-100 cursor-pointer  
             ${subCategoryId === s._id ? "bg-green-100" : ""}`}
               >
-                <div className="w-fit max-w-28 mx-auto lg:mx-0  bg-white rounded box-border">
+                <div className="w-fit max-w-28 mx-auto lg:mx-0   rounded box-border  flex items-center">
                   <img
                     src={s.image}
                     alt="subCategory"
-                    className="w-14 lg:h-16 lg:w-12 h-full object-scale-down"
+                    className="w-14 lg:h-14 lg:w-12 h-full object-scale-down hover:scale-110 duration-100"
                   />
                 </div>
                 <p className="-mt-6 lg:mt-0 text-xs text-center lg:text-left lg:text-base">
