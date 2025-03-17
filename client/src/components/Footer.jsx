@@ -13,19 +13,19 @@ const Footer = () => {
         <div className="flex items-center gap-4 justify-center text-2xl">
           <a
             href="https://github.com/SamSwnshi"
-            className="hover:text-blue-700 hover:scale-120 duration-100"
+            className="hover:text-green-800 hover:scale-120 duration-100"
           >
             <FaGithubAlt />
           </a>
           <a
             href="https://www.instagram.com/_sameer_suryawanshi_/"
-            className="hover:text-blue-500 hover:scale-120 duration-100"
+            className="hover:text-green-800 hover:scale-120 duration-100"
           >
             <FaInstagram />
           </a>
           <a
             href="https://www.linkedin.com/in/sameer-suryawanshi/"
-            className="hover:text-blue-500 hover:scale-120 duration-100"
+            className="hover:text-green-800 hover:scale-120 duration-100"
           >
             <FaLinkedin />
           </a>

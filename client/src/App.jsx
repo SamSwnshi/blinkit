@@ -68,7 +68,7 @@ const App = () => {
   return (
     <GlobalProvider>
       <Header />
-      <main className="min-h-[80vh]">
+      <main className="min-h-[80vh] tracking-wider">
         <Outlet />
       </main>
       <Footer />

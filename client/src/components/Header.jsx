@@ -40,11 +40,11 @@ const Header = () => {
     navigate("/user");
   };
   return (
-    <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 bottom-0 z-40 flex flex-col justify-center gap-1 bg-white ">
+    <header className="h-24 lg:h-20 lg:shadow-md sticky top-0 bottom-0 z-40 flex flex-col justify-center gap-1 bg-white tracking-wider">
       {!(isSearchPage && isMobile) && (
         <div className="container -my-8 mx-auto flex items-center justify-between ">
           {/**logo */}
-          <div className="h-full">
+          <div className="h-full hover:scale-110 duration-200">
             <Link to={"/"} className="h-full flex justify-center items-center">
               <img
                 src={logo}
@@ -102,13 +102,13 @@ const Header = () => {
                   )}
                 </div>
               ) : (
-                <button onClick={redirectToLoginPage} className="text-lg px-2">
+                <button onClick={redirectToLoginPage} className="cursor-pointer text-lg px-2 hover:scale-120 duration-150">
                   Login
                 </button>
               )}
               <button
                 onClick={() => setOpenCartSection(true)}
-                className="flex items-center gap-2 bg-green-800 hover:bg-green-700 px-3 py-2 rounded text-white"
+                className="flex items-center gap-2 bg-green-800 hover:bg-green-600 px-3 py-2 rounded text-white"
               >
                 {/**add to card icons */}
                 <div className="animate-bounce">

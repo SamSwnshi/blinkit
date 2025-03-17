@@ -40,12 +40,12 @@ const Login = () => {
             });
 
             if (response.data.error) {
-                toast.error(response.data.message); // ✅ Show error toast
+                console.error(response.data.message); 
                 return;
             }
 
             if (response.data.message === "Login successfully") {
-                toast.success("Logged in successfully! 🎉"); // ✅ Show success toast
+                toast.success("Logged in successfully! 🎉");  toast
                 localStorage.setItem('accesstoken', response.data.data.accesstoken);
                 localStorage.setItem('refreshToken', response.data.data.refreshToken);
                     const userDetails = await fetchUserDetails();
@@ -56,19 +56,16 @@ const Login = () => {
                 setTimeout(() => navigate("/"), 1000); 
             }
         } catch (error) {
-            AxiosToastError(error); // ✅ Show API error
+            AxiosToastError(error); 
         }
     };
 
     return (
-        <section className='w-full container mx-auto px-2'>
-            {/* ✅ Toast Notification Container */}
-            <ToastContainer position="top-center" autoClose={3000} />
-
-            <div className='bg-sky-300 my-4 w-full max-w-lg mx-auto rounded p-7'>
+        <section className='w-full container mx-auto px-2  py-5'>
+            <div className='bg-green-800 my-4 w-full max-w-lg mx-auto rounded p-7'>
                 <form className='grid gap-4 py-4' onSubmit={handleSubmit}>
                     <div className='grid gap-1'>
-                        <label htmlFor='email'>Email:</label>
+                        <label htmlFor='email' className='text-white'>Email:</label>
                         <input
                             type='email'
                             id='email'
@@ -81,7 +78,7 @@ const Login = () => {
                     </div>
 
                     <div className='grid gap-1'>
-                        <label htmlFor='password'>Password:</label>
+                        <label htmlFor='password' className='text-white'>Password:</label>
                         <div className='bg-blue-50 p-2 border rounded flex items-center focus-within:border-primary-200'>
                             <input
                                 type={showPassword ? "text" : "password"}
@@ -106,9 +103,9 @@ const Login = () => {
                     </button>
                 </form>
 
-                <p className='flex justify-center'>
+                <p className='flex justify-center text-green-400'>
                     Don't have an account?  
-                    <Link to={"/register"} className='font-semibold text-green-700 hover:text-green-800 ml-1'>
+                    <Link to={"/register"} className='font-semibold text-green-300 hover:text-white ml-1'>
                         Register
                     </Link>
                 </p>
