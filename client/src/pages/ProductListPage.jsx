@@ -88,11 +88,11 @@ const ProductListPage = () => {
             hover:bg-green-100 cursor-pointer
             ${subCategoryId === s._id ? "bg-green-100" : ""}`}
               >
-                <div className="w-fit max-w-28 mx-auto lg:mx-0 bg-white rounded box-border">
+                <div className="w-fit max-w-28 mx-auto lg:mx-0  bg-white rounded box-border">
                   <img
                     src={s.image}
                     alt="subCategory"
-                    className="w-14 lg:h-14 lg:w-12 h-full object-scale-down"
+                    className="w-14 lg:h-16 lg:w-12 h-full object-scale-down"
                   />
                 </div>
                 <p className="-mt-6 lg:mt-0 text-xs text-center lg:text-left lg:text-base">
@@ -110,7 +110,7 @@ const ProductListPage = () => {
           </div>
           <div>
             <div className="min-h-[80vh] max-h-[80vh] overflow-y-auto relative gap-2">
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 p-4 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3 p-4 gap-4">
                 {data.map((p, index) => (
                   <CardProduct
                     data={p}
