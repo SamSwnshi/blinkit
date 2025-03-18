@@ -56,13 +56,16 @@ export const getProduct = async(req,res) =>{
     try {
         let { page, limit, search } = req.body 
 
-        if(!page){
-            page = 1
-        }
+        // if(!page){
+        //     page = 1
+        // }
 
-        if(!limit){
-            limit = 10
-        }
+        // if(!limit){
+        //     limit = 50
+        // }
+
+        page = Number(page) || 1;
+        limit = Number(limit) || 12; 
 
         const query = search ? {
             $text : {
@@ -82,7 +85,7 @@ export const getProduct = async(req,res) =>{
             error : false,
             success : true,
             totalCount : totalCount,
-            totalNoPage : Math.ceil( totalCount / limit),
+            totalNoPage: Math.ceil(totalCount / limit),
             data : data
         })
         
