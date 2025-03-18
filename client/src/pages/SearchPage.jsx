@@ -5,8 +5,9 @@ import Axios from '../utils/config'
 import AxiosToastError from '../utils/AxiosError'
 import CardProduct from "../components/CardProduct"
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import noDataImage from '../assets/nothing here yet.webp'
+import logo from "../assets/logo.png";
 
 
 const SearchPage = () => {
@@ -66,6 +67,7 @@ const SearchPage = () => {
 
   return (
     <section className='bg-white'>
+ 
       <div className='container mx-auto p-4'>
         <p className='font-semibold'>Search Results: {data.length}  </p>
 
@@ -74,7 +76,7 @@ const SearchPage = () => {
               hasMore={true}
               next={handleFetchMore}
         >
-        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 py-4 gap-4'>
+        <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 py-4 gap-4'>
               {
                 data.map((p,index)=>{
                   return(

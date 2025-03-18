@@ -1,31 +1,39 @@
 import React from "react";
-
-import { FaInstagram } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
-import { FaGithubAlt } from "react-icons/fa";
+import logo from "../assets/logo.png";
+import { FaInstagram, FaLinkedin, FaGithubAlt } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <footer className="border-t mt-10 ">
-      <div className="container mx-auto p-4 text-center flex flex-col lg:flex-row lg:justify-between gap-2">
-        <p>© All Rights Reserved 2025.</p>
+      <div className="container mx-auto p-2 flex flex-row items-center justify-between gap-4 text-center">
+        {/* Logo Section */}
+        <div className="h-full hover:scale-120 duration-200">
+          <Link to="/" className="h-full flex items-center">
+            <img src={logo} width={120} height={30} alt="logo" />
+          </Link>
+        </div>
 
-        <div className="flex items-center gap-4 justify-center text-2xl">
+        {/* Copyright Section */}
+        <p className="text-sm">© All Rights Reserved 2025.</p>
+
+        {/* Social Icons Section */}
+        <div className="flex items-center gap-4 text-2xl">
           <a
             href="https://github.com/SamSwnshi"
-            className="hover:text-green-800 hover:scale-120 duration-100"
+            className="hover:text-green-800 hover:scale-110 duration-200"
           >
             <FaGithubAlt />
           </a>
           <a
             href="https://www.instagram.com/_sameer_suryawanshi_/"
-            className="hover:text-green-800 hover:scale-120 duration-100"
+            className="hover:text-green-800 hover:scale-110 duration-200"
           >
             <FaInstagram />
           </a>
           <a
             href="https://www.linkedin.com/in/sameer-suryawanshi/"
-            className="hover:text-green-800 hover:scale-120 duration-100"
+            className="hover:text-green-800 hover:scale-110 duration-200"
           >
             <FaLinkedin />
           </a>

@@ -4,6 +4,7 @@ import { useLocation, useNavigate, Link } from "react-router-dom";
 import { TypeAnimation } from "react-type-animation";
 import { FaArrowLeft } from "react-icons/fa";
 import useMobile from "../hooks/useMobile";
+import logo from "../assets/logo.png";
 
 const Search = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const Search = () => {
   useEffect(() => {
     const isSearch = location.pathname === "/search";
     setIsSearchPage(isSearch);
+    console.log("isSearchPage:", isSearch); 
   }, [location]);
   const searchPage = () => {
     navigate("/search");
@@ -28,7 +30,8 @@ const Search = () => {
   };
 
   return (
-    <div className="w-full  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border overflow-hidden flex items-center text-neutral-500 bg-slate-50 group focus-within:border-primary-200 ">
+    <div className="w-full  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border  flex items-center text-neutral-500 bg-slate-50">
+      
       <div>
         {isMobile && isSearchPage ? (
           <Link
@@ -75,19 +78,19 @@ const Search = () => {
           </div>
         ) : (
           //when i was search page
-          <div className="w-full h-full border-2">
+          <div className="w-full h-full border ">
             <input
               type="text"
               placeholder="Search for atta dal and more."
               autoFocus
-              defaultValue={searchText}
-              className="bg-transparent w-full h-full outline-none"
+              value={searchText}
+              className="bg-white w-full h-full  outline-none px-2"
               onChange={handleOnChange}
             />
           </div>
         )}
       </div>
-      
+
     </div>
   );
 };
