@@ -28,13 +28,13 @@ const DisplayCartItem = ({close}) => {
   };
   return (
     <section className="bg-neutral-900 fixed top-0 bottom-0 right-0 left-0 bg-opacity-70 z-50">
-      <div className="bg-white w-full max-w-sm min-h-screen max-h-screen ml-auto">
+      <div className="bg-green-800 w-full max-w-sm min-h-screen max-h-screen ml-auto">
         <div className="flex items-center p-4 shadow-md gap-3 justify-between">
-          <h2 className="font-semibold">Cart</h2>
-          <Link to={"/"} className="lg:hidden">
+          <h2 className="font-semibold text-white">Cart</h2>
+          <Link to={"/"} className="lg:hidden hover:text-white">
             <IoClose size={25} />
           </Link>
-          <button onClick={close} className="hidden lg:block">
+          <button onClick={close} className="hidden lg:block hover:text-white">
             <IoClose size={25} />
           </button>
         </div>
@@ -43,7 +43,7 @@ const DisplayCartItem = ({close}) => {
           {/***display items */}
           {cartItem[0] ? (
             <>
-              <div className="flex items-center justify-between px-4 py-2 bg-blue-100 text-blue-500 rounded-full">
+              <div className="flex items-center justify-between px-4 py-2 bg-green-800 text-white rounded-md">
                 <p>Your total savings</p>
                 <p>
                   {DisplayPriceInRupees(notDiscountTotalPrice - totalPrice)}
@@ -130,7 +130,7 @@ const DisplayCartItem = ({close}) => {
 
         {cartItem[0] && (
           <div className="p-2">
-            <div className="bg-green-700 text-neutral-100 px-4 font-bold text-base py-4 static bottom-3 rounded flex items-center gap-4 justify-between">
+            <div className="bg-green-900 text-neutral-100 px-4 font-bold text-base py-4 static bottom-3 rounded flex items-center gap-4 justify-between cursor-pointer">
               <div>{DisplayPriceInRupees(totalPrice)}</div>
               <button
                 onClick={redirectToCheckoutPage}

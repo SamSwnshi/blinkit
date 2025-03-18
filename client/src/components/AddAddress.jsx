@@ -43,7 +43,7 @@ const AddAddress = ({ close }) => {
   };
   return (
     <section className="bg-black  fixed top-0 left-0 right-0 bottom-0 z-50 bg-opacity-70 h-screen overflow-auto">
-      <div className="bg-green-700 p-4 w-full max-w-lg mt-8 mx-auto rounded">
+      <div className="bg-green-800 p-4 w-full max-w-lg mt-8 mx-auto rounded">
         <div className="flex justify-between items-center gap-4">
           <h2 className="font-semibold text-white">Add Address</h2>
           <button onClick={close} className="hover:text-white">
@@ -108,7 +108,7 @@ const AddAddress = ({ close }) => {
 
           <button
             type="submit"
-            className="bg-white w-full rounded-sm  py-2 font-semibold mt-4 hover:bg-green-900 hover:text-white"
+            className="bg-white w-full rounded-sm  py-2 font-semibold mt-4 hover:bg-black hover:text-white"
           >
             Submit
           </button>

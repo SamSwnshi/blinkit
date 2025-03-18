@@ -67,7 +67,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
                 ...prev,
                 image: ImageResponse.data.url
             }));
-            toast.success("Image uploaded successfully!");  // ✅ Show success toast
+            toast.success("Image uploaded successfully!");  
         } catch (error) {
             toast.error("Image upload failed. Please try again.");
         }
@@ -75,16 +75,16 @@ const UploadCategoryModel = ({ close, fetchData }) => {
 
     return (
         <section className='fixed top-0 bottom-0 left-0 right-0 p-4 bg-neutral-800 bg-opacity-60 flex items-center justify-center'>
-            <div className='bg-white max-w-4xl w-full p-4 rounded'>
+            <div className='bg-green-800 max-w-4xl w-full p-4 rounded'>
                 <div className='flex items-center justify-between'>
-                    <h1 className='font-semibold'>Category</h1>
-                    <button onClick={close} className='w-fit block ml-auto'>
+                    <h1 className='font-semibold text-white'>Category</h1>
+                    <button onClick={close} className='w-fit block ml-auto hover:text-white'>
                         <IoClose size={25} />
                     </button>
                 </div>
                 <form className='my-3 grid gap-2' onSubmit={handleSubmit}>
                     <div className='grid gap-1'>
-                        <label id='categoryName'>Name</label>
+                        <label id='categoryName' className='text-white'>Name</label>
                         <input
                             type='text'
                             id='categoryName'
@@ -96,7 +96,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
                         />
                     </div>
                     <div className='grid gap-1'>
-                        <p>Image</p>
+                        <p className='text-white'>Image</p>
                         <div className='flex gap-4 flex-col lg:flex-row items-center'>
                             <div className='border bg-blue-50 h-36 w-full lg:w-36 flex items-center justify-center rounded'>
                                 {
@@ -125,7 +125,7 @@ const UploadCategoryModel = ({ close, fetchData }) => {
 
                     <button
                         className={`
-                        ${data.name && data.image ? "bg-green-500 hover:bg-yellow-700" : "bg-yellow-300"}
+                        ${data.name && data.image ? "bg-white text-black hover:bg-black hover:text-white" : "bg-white"}
                         py-2 font-semibold 
                         `}
                     >Add Category</button>

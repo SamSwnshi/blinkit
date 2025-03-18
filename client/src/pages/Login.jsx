@@ -43,9 +43,11 @@ const Login = () => {
                 toast.error(response.data.message); 
                 return;
             }
+            console.log(response.data,"from login")
+            console.log(response.data.success,"from login")
 
-            if (response.data.message === "Login successfully") {
-                toast.success("Logged in successfully! 🎉");  toast
+            if (response.data.success) {
+                toast.success("Logged in successfully! 🎉");  
                 localStorage.setItem('accesstoken', response.data.data.accesstoken);
                 localStorage.setItem('refreshToken', response.data.data.refreshToken);
                     const userDetails = await fetchUserDetails();
@@ -97,7 +99,7 @@ const Login = () => {
 
                     <button
                         disabled={!isValid}
-                        className={`${isValid ? "bg-green-500 hover:bg-blue-500" : "bg-gray-500"} text-white py-2 rounded font-semibold my-3 tracking-wide`}
+                        className={`${isValid ? "bg-white  hover:text-white hover:bg-black" : "bg-gray-500"} text-black py-2 rounded font-semibold my-3 tracking-wide`}
                     >
                         Login
                     </button>

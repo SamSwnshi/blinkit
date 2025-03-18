@@ -145,18 +145,18 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
     }
     return (
         <section className='fixed top-0 right-0 left-0 bottom-0 bg-black z-50 bg-opacity-70 p-4'>
-        <div className='bg-white w-full p-4 max-w-2xl mx-auto rounded overflow-y-auto h-full max-h-[95vh]'>
+        <div className='bg-green-800 w-full p-4 max-w-2xl mx-auto  overflow-y-auto h-full max-h-[95vh]'>
           <section className=''>
-            <div className='p-2   bg-white shadow-md flex items-center justify-between'>
-              <h2 className='font-semibold'>Upload Product</h2>
+            <div className='p-2  flex items-center justify-between '>
+              <h2 className='font-semibold text-white'>Upload Product</h2>
               <button onClick={close}>
-                <IoClose size={20}/>
+                <IoClose size={20} className='hover:text-white'/>
               </button>
             </div>
             <div className='grid p-3'>
               <form className='grid gap-4' onSubmit={handleSubmit}>
                 <div className='grid gap-1'>
-                  <label htmlFor='name' className='font-medium'>Name</label>
+                  <label htmlFor='name' className='font-medium text-white'>Name</label>
                   <input
                     id='name'
                     type='text'
@@ -169,7 +169,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                   />
                 </div>
                 <div className='grid gap-1'>
-                  <label htmlFor='description' className='font-medium'>Description</label>
+                  <label htmlFor='description' className='font-medium text-white'>Description</label>
                   <textarea
                     id='description'
                     type='text'
@@ -184,7 +184,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                   />
                 </div>
                 <div>
-                  <p className='font-medium'>Image</p>
+                  <p className='font-medium text-white'>Image</p>
                   <div>
                     <label htmlFor='productImage' className='bg-blue-50 h-24 border rounded flex justify-center items-center cursor-pointer'>
                       <div className='text-center flex justify-center items-center flex-col'>
@@ -229,7 +229,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
   
                 </div>
                 <div className='grid gap-1'>
-                  <label className='font-medium'>Category</label>
+                  <label className='font-medium text-white'>Category</label>
                   <div>
                     <select
                       className='bg-blue-50 border w-full p-2 rounded'
@@ -273,7 +273,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                   </div>
                 </div>
                 <div className='grid gap-1'>
-                  <label className='font-medium'>Sub Category</label>
+                  <label className='font-medium text-white'>Sub Category</label>
                   <div>
                     <select
                       className='bg-blue-50 border w-full p-2 rounded'
@@ -318,7 +318,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                 </div>
   
                 <div className='grid gap-1'>
-                  <label htmlFor='unit' className='font-medium'>Unit</label>
+                  <label htmlFor='unit' className='font-medium text-white'>Unit</label>
                   <input
                     id='unit'
                     type='text'
@@ -332,7 +332,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                 </div>
   
                 <div className='grid gap-1'>
-                  <label htmlFor='stock' className='font-medium'>Number of Stock</label>
+                  <label htmlFor='stock' className='font-medium text-white'>Number of Stock</label>
                   <input
                     id='stock'
                     type='number'
@@ -346,7 +346,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                 </div>
   
                 <div className='grid gap-1'>
-                  <label htmlFor='price' className='font-medium'>Price</label>
+                  <label htmlFor='price' className='font-medium text-white'>Price</label>
                   <input
                     id='price'
                     type='number'
@@ -360,7 +360,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                 </div>
   
                 <div className='grid gap-1'>
-                  <label htmlFor='discount' className='font-medium'>Discount</label>
+                  <label htmlFor='discount' className='font-medium text-white'>Discount</label>
                   <input
                     id='discount'
                     type='number'
@@ -379,7 +379,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                   Object?.keys(data?.more_details)?.map((k, index) => {
                     return (
                       <div className='grid gap-1'>
-                        <label htmlFor={k} className='font-medium'>{k}</label>
+                        <label htmlFor={k} className='font-medium text-white'>{k}</label>
                         <input
                           id={k}
                           type='text'
@@ -409,7 +409,7 @@ const EditProductAdmin = ({ close, data: propsData, fetchProductData }) => {
                 </div>
   
                 <button
-                  className='bg-primary-100 hover:bg-primary-200 py-2 rounded font-semibold'
+                  className='bg-white hover:bg-black hover:text-white py-2 rounded font-semibold'
                 >
                   Update Product
                 </button>

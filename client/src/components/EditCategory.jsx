@@ -123,7 +123,7 @@ const EditCategory = ({close, fetchData,data : CategoryData}) => {
 
             <button
                 className={`
-                ${data.name && data.image ? "bg-blue-200 hover:bg-blue-500" : "bg-blue-700 "}
+                ${data.name && data.image ? "bg-blue-200 hover:bg-blue-500" : "bg-blue-700 hover:text-white"}
                 py-2    
                 font-semibold 
                 `}

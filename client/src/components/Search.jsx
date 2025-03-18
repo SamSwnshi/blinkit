@@ -43,7 +43,7 @@ const Search = () => {
           </button>
         )}
       </div>
-      <div className="w-full h-full">
+      <div className="w-full h-full ">
         {!isSearchPage ? (
           //not in search page
           <div onClick={searchPage} className="w-full h-full flex items-center">
@@ -75,7 +75,7 @@ const Search = () => {
           </div>
         ) : (
           //when i was search page
-          <div className="w-full h-full">
+          <div className="w-full h-full border-2">
             <input
               type="text"
               placeholder="Search for atta dal and more."
@@ -87,6 +87,7 @@ const Search = () => {
           </div>
         )}
       </div>
+      
     </div>
   );
 };
