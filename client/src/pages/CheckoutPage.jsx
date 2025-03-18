@@ -164,14 +164,14 @@ const CheckoutPage = () => {
           <div className="w-full flex flex-col gap-4">
             <button
               onClick={handleOnlinePayment}
-              className="py-2 px-4 bg-green-600 hover:bg-green-700 rounded text-white font-semibold"
+              className="py-2 px-4 bg-black hover:bg-green-600 rounded text-white font-semibold"
             >
               Online Payment
             </button>
 
             <button
               onClick={handleCashOnDelivery}
-              className="py-2 px-4 border-2 border-green-600 font-semibold text-green-600 hover:bg-green-600 hover:text-white"
+              className="py-2 px-4 border-2  font-semibold text-green-600 hover:bg-green-600 hover:text-white"
             >
               Cash on Delivery
             </button>

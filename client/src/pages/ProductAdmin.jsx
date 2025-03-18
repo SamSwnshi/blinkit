@@ -19,17 +19,19 @@ const ProductAdmin = () => {
       const response = await Axios({
         ...SummaryApi.getProduct,
         data: {
-          page: page,
-          limit: 12,
+          page: 1,
+          limit: 20,
           search: search,
         },
       });
 
       const { data: responseData } = response;
-      console.log("from ADMIN", response.data);
+      console.log("from ADMIN", response.data.data);
+      console.log("Page:", page, "Total Pages:", responseData.totalNoPage);
+    console.log("Products Fetched:", responseData.data.length);
 
       if (responseData.success) {
-        setTotalPageCount(responseData.totalNoPage);
+        setTotalPageCount(responseData.totalNoPage || 1);
         setProductData(responseData.data);
       }
     } catch (error) {
@@ -41,10 +43,10 @@ const ProductAdmin = () => {
 
   useEffect(() => {
     fetchProductData();
-  }, [page]);
+  }, [page,search]);
 
   const handleNext = () => {
-    if (page !== totalPageCount) {
+    if (page < totalPageCount) {
       setPage(preve => preve + 1)
     }
   }
@@ -77,14 +79,14 @@ const ProductAdmin = () => {
 
   return (
     <section>
-      <div className='p-3 shadow-md flex items-center justify-between gap-4'>
+      <div className='p-3 bg-green-800 text-white shadow-md flex items-center justify-between gap-4'>
         <h2 className='font-semibold'>Product</h2>
-        <div className='h-full min-w-28 max-w-56 w-full ml-auto bg-blue-50 px-4 flex items-center gap-3 py-2 rounded  border focus-within:border-primary-200'>
-          <IoSearchOutline size={25} />
+        <div className='h-full min-w-32 max-w-56 w-full ml-auto bg-blue-50 px-4 flex items-center gap-3 py-2 rounded  border focus-within:border-primary-200'>
+          <IoSearchOutline size={25} className="text-black"/>
           <input
             type='text'
             placeholder='Search product here ...'
-            className='h-full w-full  outline-none bg-transparent'
+            className='h-full w-full text-black  outline-none bg-transparent'
             value={search}
             onChange={handleOnChange}
           />
@@ -98,7 +100,7 @@ const ProductAdmin = () => {
 
       <div className='p-4 '>
         <div className='min-h-[55vh]'>
-          <div className='grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4'>
+          <div className='grid grid-cols-2 cursor-pointer  md:grid-cols-3 lg:grid-cols-4 gap-3'>
             {
               productData.map((p, index) => {
                 return (

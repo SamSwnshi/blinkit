@@ -41,13 +41,13 @@ const CategoryWiseProduct = ({ id, name }) => {
     fetchCategoryWiseProduct();
   }, []);
 
-  const handleScrollRight = () => {
-    containerRef.current.scrollLeft += 200;
-  };
+  // const handleScrollRight = () => {
+  //   containerRef.current.scrollLeft += 200;
+  // };
 
-  const handleScrollLeft = () => {
-    containerRef.current.scrollLeft -= 200;
-  };
+  // const handleScrollLeft = () => {
+  //   containerRef.current.scrollLeft -= 200;
+  // };
 
   const handleRedirectProductListpage = () => {
     const subcategory = subCategoryData.find((sub) => {

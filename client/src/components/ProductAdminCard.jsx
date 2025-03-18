@@ -7,7 +7,7 @@ import AxiosToastError from "../utils/AxiosError";
 import EditProductAdmin from "./EditProductAdmin";
 
 const ProductAdminCard = ({ data, fetchProductData }) => {
-    console.log("Fetched Product",data)
+    // console.log("Fetched Product",data)
     const [editOpen, setEditOpen] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
 
@@ -38,7 +38,7 @@ const ProductAdminCard = ({ data, fetchProductData }) => {
         }
     }
     return (
-        <div className="w-36 p-4 mt-2 ml-2 rounded bg-white border-1 border-gray-400 shadow-lg">
+        <div className="w-42 p-4 mt-2 ml-2 rounded bg-white border-1 border-gray-400 shadow-lg ">
             <div>
                 <img
                     src={data?.image[0]}
@@ -48,16 +48,16 @@ const ProductAdminCard = ({ data, fetchProductData }) => {
             </div>
             <p className="text-ellipsis line-clamp-2 font-medium">{data?.name}</p>
             <p className="text-slate-400">{data?.stock}</p>
-            <div className="grid grid-cols-2 gap-3 py-2">
+            <div className="grid grid-cols-2 gap-4 py-2">
                 <button
                     onClick={() => setEditOpen(true)}
-                    className="border px-1 py-1 text-sm border-green-600 bg-green-100 text-green-800 hover:bg-green-200 rounded"
+                    className="border w-14 px-1 py-1 text-sm border-green-600 bg-green-100 text-green-800 hover:bg-green-200 rounded"
                 >
                     Edit
                 </button>
                 <button
                     onClick={() => setOpenDelete(true)}
-                    className="border px-1 py-1 text-sm border-red-600 bg-red-100 text-red-600 hover:bg-red-200 rounded"
+                    className="border w-14 px-1 py-1 text-sm border-red-600 bg-red-100 text-red-600 hover:bg-red-200 rounded"
                 >
                     Delete
                 </button>
@@ -71,15 +71,15 @@ const ProductAdminCard = ({ data, fetchProductData }) => {
             {
                 openDelete && (
                     <section className='fixed top-0 left-0 right-0 bottom-0 bg-neutral-600 z-50 bg-opacity-70 p-4 flex justify-center items-center '>
-                        <div className='bg-white p-4 w-full max-w-md rounded-md'>
+                        <div className='bg-green-800 p-4 w-full max-w-md rounded-md'>
                             <div className='flex items-center justify-between gap-4'>
-                                <h3 className='font-semibold'>Permanent Delete</h3>
+                                <h3 className='font-semibold text-white'>Permanent Delete</h3>
                                 <button onClick={() => setOpenDelete(false)}>
-                                    <IoClose size={25} />
+                                    <IoClose size={25} className="hover:text-white"/>
                                 </button>
                             </div>
-                            <p className='my-2'>Are you sure want to delete permanent ?</p>
-                            <div className='flex justify-end gap-5 py-4'>
+                            <p className='my-2 text-white'>Are you sure want to delete permanent ?</p>
+                            <div className='flex justify-between gap-5 py-4'>
                                 <button onClick={handleDeleteCancel} className='border px-3 py-1 rounded bg-red-100 border-red-500 text-red-500 hover:bg-red-200'>Cancel</button>
                                 <button onClick={handleDelete} className='border px-3 py-1 rounded bg-green-100 border-green-500 text-green-500 hover:bg-green-200'>Delete</button>
                             </div>

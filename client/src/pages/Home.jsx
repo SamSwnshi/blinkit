@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <section>
        <div className='container mx-auto'>
-          <div className={`w-full h-full min-h-48 bg-blue-100 rounded ${!banner && "animate-pulse my-2" } `}>
+          <div className={`w-full cursor-pointer h-full min-h-48 bg-blue-100 rounded ${!banner && "animate-pulse my-2" } `}>
               <img
                 src={banner}
                 className='w-full h-full hidden lg:block'
@@ -57,7 +57,7 @@ const Home = () => {
             ) : (
               categoryData.map((cat,index)=>{
                 return(
-                  <div key={cat._id+"displayCategory"} className='w-full h-full' onClick={()=>handleRedirectProductListpage(cat._id,cat.name)}>
+                  <div key={cat._id+"displayCategory"} className='w-full h-full hover:scale-110 duration-300 cursor-pointer' onClick={()=>handleRedirectProductListpage(cat._id,cat.name)}>
                     <div>
                         <img 
                           src={cat.image}
