@@ -29,7 +29,7 @@ const Search = () => {
 
   return (
     <div className="flex w-full justify-center">
-      <div className="w-1/2  min-w-[300px] lg:min-w-[420px] h-11 lg:h-12 rounded-lg border  flex items-center text-neutral-500 bg-slate-50">
+      <div className="w-48  min-w-[250px] sm:min-md lg:min-w-[420px] h-11 lg:h-12 rounded-lg border border-gray-400  flex items-center text-neutral-500 bg-slate-50">
         <div>
           {isMobile && isSearchPage ? (
             <Link
