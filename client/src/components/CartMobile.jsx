@@ -24,7 +24,7 @@ const CartMobile = () => {
                                 </div>
                             </div>
 
-                            <Link to={"/cart"} className='flex items-center gap-1'>
+                            <Link to={"/cartitems"} className='flex items-center gap-1'>
                                 <span className='text-sm hover:text-green-300'>View Cart</span>
                                 <FaCaretRight />
                             </Link>

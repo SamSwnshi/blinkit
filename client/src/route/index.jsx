@@ -21,6 +21,7 @@ import CheckoutPage from "../pages/CheckoutPage";
 import Success from "../pages/Success";
 import Cancel from "../pages/Cancel";
 import Address from "../pages/Address";
+import DisplayCartItem from "../components/DisplayCartItem";
 
 const router = createBrowserRouter([
   {
@@ -102,30 +103,34 @@ const router = createBrowserRouter([
         children: [
           {
             path: ":subCategory",
-            element: <ProductListPage/> ,
-          }
-        ]
+            element: <ProductListPage />,
+          },
+        ],
       },
       {
         path: "product/:product",
-        element: <ProductDisplayPage/>
+        element: <ProductDisplayPage />,
       },
       {
-        path : 'cart',
-        element : <CartMobile/>
-    },
-    {
-        path : "checkout",
-        element : <CheckoutPage/>
-    },
-    {
-        path : "success",
-        element : <Success/>
-    },
-    {
-        path : 'cancel',
-        element : <Cancel/>
-    }
+        path: "cart",
+        element: <CartMobile />,
+      },
+      {
+        path: "cartitems",
+        element: <DisplayCartItem />,
+      },
+      {
+        path: "checkout",
+        element: <CheckoutPage />,
+      },
+      {
+        path: "success",
+        element: <Success />,
+      },
+      {
+        path: "cancel",
+        element: <Cancel />,
+      },
     ],
   },
 ]);
