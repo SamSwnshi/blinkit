@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import toast, { Toaster } from "react-hot-toast";
@@ -19,6 +19,7 @@ import CartMobileLink from "./components/CartMobile"
 
 const App = () => {
   const dispatch = useDispatch();
+  const location = useLocation()
 
   const fetchUser = async () => {
     const userData = await fetchUserDetails();

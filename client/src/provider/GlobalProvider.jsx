@@ -27,11 +27,11 @@ const GlobalProvider = ({ children }) => {
         ...SummaryApi.getCartItem,
       });
       const { data: responseData } = response;
-      console.log(responseData)
+      // console.log(responseData)
 
       if (responseData.success) {
         dispatch(handleAddItemCart(responseData.data));
-        console.log("Updated Cart Data:", responseData.data);
+        // console.log("Updated Cart Data:", responseData.data);
       }
     } catch (error) {
       console.log(error);
@@ -87,7 +87,7 @@ const GlobalProvider = ({ children }) => {
       })
       const { data : responseData } = response
 
-      console.log("address",responseData)
+      // console.log("address",responseData)
 
       if(responseData.success){
         dispatch(handleAddAddress(responseData.data))
