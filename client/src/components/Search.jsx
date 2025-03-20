@@ -79,13 +79,13 @@ const Search = () => {
             </div>
           ) : (
             //when i was search page
-            <div className="w-full  h-full border ">
+            <div className="w-full  h-full  ">
               <input
                 type="text"
                 placeholder="Search for atta dal and more."
                 autoFocus
                 value={searchText}
-                className="bg-white w-full h-full  outline-none px-2"
+                className="  w-full h-full  outline-none px-2"
                 onChange={handleOnChange}
               />
             </div>

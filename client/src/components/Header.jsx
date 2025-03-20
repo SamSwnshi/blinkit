@@ -53,7 +53,7 @@ const Header = () => {
             <img
               src={logo}
               width={120}
-              height={60}
+              height={70}
               alt="logo"
               className="lg:hidden"
             />
