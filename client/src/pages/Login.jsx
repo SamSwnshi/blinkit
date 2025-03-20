@@ -43,11 +43,9 @@ const Login = () => {
                 toast.error(response.data.message); 
                 return;
             }
-            console.log(response.data,"from login")
-            console.log(response.data.success,"from login")
 
-            if (response.data.success) {
-                toast.success("Logged in successfully! 🎉");  
+            if (response.data.message === "Login successfully") {
+                toast("Logged in successfully! 🎉");  
                 localStorage.setItem('accesstoken', response.data.data.accesstoken);
                 localStorage.setItem('refreshToken', response.data.data.refreshToken);
                     const userDetails = await fetchUserDetails();
