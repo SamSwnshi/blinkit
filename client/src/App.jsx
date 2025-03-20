@@ -66,6 +66,10 @@ const App = () => {
     fetchCategory();
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
   return (
     <GlobalProvider>
       <Header />
