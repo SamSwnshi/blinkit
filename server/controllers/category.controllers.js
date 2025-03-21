@@ -1,13 +1,15 @@
 import CategoryModel from "../models/category.models.js";
 import SubCategoryModel from "../models/subCategory.models.js";
 import ProductModel from "../models/product.models.js"
+import mongoose from "mongoose";
+
 
 export const addCategory = async (req, res) => {
   try {
     const { name, image } = req.body;
 
     if (!name || !image) {
-      return response.status(400).json({
+      return res.status(400).json({
         message: "Enter required fields",
         error: true,
         success: false,
@@ -90,36 +92,55 @@ export const updateCategory = async(req,res) =>{
 
 export const deleteCategory = async(req,res) =>{
     try {
-        const { _id } = req.body 
+      console.log("Request Body:", req.body);
 
-        const checkSubCategory = await SubCategoryModel.find({
-            category : {
-                "$in" : [ _id ]
-            }
-        }).countDocuments()
+      const { _id } = req.body;
 
-        const checkProduct = await ProductModel.find({
-            category : {
-                "$in" : [ _id ]
-            }
-        }).countDocuments()
+      if (!_id) {
+          return res.status(400).json({
+              message: "Category ID is required",
+              error: true,
+              success: false
+          });
+      }
 
-        if(checkSubCategory >  0 || checkProduct > 0 ){
-            return res.status(400).json({
-                message : "Category is already use can't delete",
-                error : true,
-                success : false
-            })
-        }
+      // Convert _id to ObjectId
+      const objectId = new mongoose.Types.ObjectId(_id);
 
-        const deleteCategory = await CategoryModel.deleteOne({ _id : _id})
+      console.log("Converted ObjectId:", objectId);
 
-        return res.json({
-            message : "Delete category successfully",
-            data : deleteCategory,
-            error : false,
-            success : true
-        })
+      // Check if the category exists before deletion
+      const categoryExists = await CategoryModel.findOne({ _id: objectId });
+      if (!categoryExists) {
+          return res.status(404).json({
+              message: "Category not found",
+              error: true,
+              success: false
+          });
+      }
+
+      const checkSubCategory = await SubCategoryModel.countDocuments({ category: objectId });
+      const checkProduct = await ProductModel.countDocuments({ category: objectId });
+
+      if (checkSubCategory > 0 || checkProduct > 0) {
+          return res.status(400).json({
+              message: "Category is in use and can't be deleted",
+              error: true,
+              success: false
+          });
+      }
+
+      const deleteCategory = await CategoryModel.deleteOne({ _id: objectId });
+
+      console.log("Delete Response:", deleteCategory);
+
+      return res.json({
+          message: "Category deleted successfully",
+          data: deleteCategory,
+          error: false,
+          success: true
+      });
+
 
     } catch (error) {
        return res.status(500).json({
