@@ -21,11 +21,15 @@ const CheckoutPage = () => {
   const [openAddress, setOpenAddress] = useState(false);
   const addressList = useSelector((state) => state.addresses.addressList);
   console.log(addressList);
-  const [selectAddress, setSelectAddress] = useState(0);
+  const [selectAddress, setSelectAddress] = useState(null);
   const cartItemsList = useSelector((state) => state.cartItem.cart);
   const navigate = useNavigate();
 
   const handleCashOnDelivery = async () => {
+    if (!addressList[selectAddress]) {
+      toast.error("Please select an address before placing the order.");
+      return;
+    }
     try {
       const response = await Axios({
         ...SummaryApi.CashOnDeliveryOrder,
@@ -59,6 +63,10 @@ const CheckoutPage = () => {
   };
 
   const handleOnlinePayment = async () => {
+    if (!addressList[selectAddress]) {
+      toast.error("Please select an address before placing the order.");
+      return;
+    }
     try {
       toast.loading("Loading...");
       const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
@@ -108,8 +116,9 @@ const CheckoutPage = () => {
                         id={"address" + index}
                         type="radio"
                         value={index}
-                        onChange={(e) => setSelectAddress(e.target.value)}
+                        onChange={(e) => setSelectAddress(Number(e.target.value))}
                         name="address"
+                        required
                       />
                     </div>
                     <div>
@@ -164,14 +173,24 @@ const CheckoutPage = () => {
           <div className="w-full flex flex-col gap-4">
             <button
               onClick={handleOnlinePayment}
-              className="py-2 px-4 bg-black hover:bg-green-600 rounded text-white font-semibold"
+              className={`py-2 px-4 rounded text-white font-semibold ${
+                addressList[selectAddress]
+                  ? "bg-black hover:bg-green-600"
+                  : "bg-gray-400 cursor-not-allowed"
+              }`}
+              disabled={!addressList[selectAddress]}
             >
               Online Payment
             </button>
 
             <button
               onClick={handleCashOnDelivery}
-              className="py-2 px-4 border-2  font-semibold text-green-600 hover:bg-green-600 hover:text-white"
+              className={`py-2 px-4 border-2 font-semibold ${
+                addressList[selectAddress]
+                  ? "text-green-600 hover:bg-green-600 hover:text-white"
+                  : "text-gray-400 border-gray-400 cursor-not-allowed"
+              }`}
+              disabled={!addressList[selectAddress]}
             >
               Cash on Delivery
             </button>
