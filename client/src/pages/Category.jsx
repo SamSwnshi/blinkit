@@ -55,7 +55,7 @@ const Category = () => {
       });
 
       const { data: responseData } = response;
-      console.log("from delte", responseData);
+      console.log("from delete", responseData);
 
       if (responseData.success) {
         toast.success(responseData.message);
@@ -78,10 +78,10 @@ const Category = () => {
         </button>
       </div>
 
-      <div className="p-4 grid  grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+      <div className="p-4 grid  grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-3 border-2  ">
         {categoryData.map((category, index) => {
           return (
-            <div className="w-38 h-64 flex flex-col justify-start rounded shadow-md hover:scale-95 duration-100" key={category._id}>
+            <div className="w-38  h-64 flex flex-col justify-start rounded shadow-md hover:scale-95 duration-100" key={category._id}>
               <img
                 alt={category.name}
                 src={category.image}
