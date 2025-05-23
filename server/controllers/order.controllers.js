@@ -58,6 +58,7 @@ export const pricewithDiscount = (price, dis = 1) => {
 };
 export const payment = async (req, res) => {
   try {
+     console.log("Received checkout request", req.body);
     const userId = req.user.id; // auth middleware
     const { list_items, totalAmt, addressId, subTotalAmt } = req.body;
 
@@ -69,7 +70,7 @@ export const payment = async (req, res) => {
           currency: "inr",
           product_data: {
             name: item.productId.name,
-            images: item.productId.image,
+            images: [item.productId.image],
             metadata: {
               productId: item.productId._id,
             },

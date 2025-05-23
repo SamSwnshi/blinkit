@@ -39,7 +39,7 @@ const ProductDisplayPage = () => {
         const { data : responseData } = response
 
         if(responseData.success){
-          console.log("GETPRODUCT DETAILS",response)
+          // console.log("GETPRODUCT DETAILS",response)
           setData(responseData.data)
         }
     } catch (error) {

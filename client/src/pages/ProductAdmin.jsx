@@ -26,9 +26,9 @@ const ProductAdmin = () => {
       });
 
       const { data: responseData } = response;
-      console.log("from ADMIN", response.data.data);
-      console.log("Page:", page, "Total Pages:", responseData.totalNoPage);
-    console.log("Products Fetched:", responseData.data.length);
+      // console.log("from ADMIN", response.data.data);
+      // console.log("Page:", page, "Total Pages:", responseData.totalNoPage);
+    // console.log("Products Fetched:", responseData.data.length);
 
       if (responseData.success) {
         setTotalPageCount(responseData.totalNoPage || 1);

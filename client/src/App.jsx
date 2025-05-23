@@ -23,6 +23,7 @@ const App = () => {
 
   const fetchUser = async () => {
     const userData = await fetchUserDetails();
+    console.log(userData)
     dispatch(setUserDetails(userData.data));
   };
 
@@ -70,6 +71,8 @@ const App = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
+
+
   return (
     <GlobalProvider>
       <Header />

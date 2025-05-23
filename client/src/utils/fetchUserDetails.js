@@ -9,6 +9,7 @@ const fetchUserDetails = async() => {
         const response = await Axios({
             ...SummaryApi.userDetails
         })    
+        console.log(response.data.data)
         
         return response.data
     } catch (error) {
