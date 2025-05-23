@@ -16,7 +16,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT;
-const allowedOrigins = process.env.FRONTEND_URL.split(",");
+const allowedOrigins = process.env.FRONTEND_URL.split(",").map(origin => origin.trim());
 
 app.use(
   cors({
