@@ -23,7 +23,7 @@ const App = () => {
 
   const fetchUser = async () => {
     const userData = await fetchUserDetails();
-    console.log(userData)
+    // console.log(userData)
     dispatch(setUserDetails(userData.data));
   };
 

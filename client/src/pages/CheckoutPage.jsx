@@ -62,41 +62,42 @@ const CheckoutPage = () => {
     }
   };
 
-  const handleOnlinePayment = async () => {
-    if (!addressList[selectAddress]) {
-      toast.error("Please select an address before placing the order.");
-      return;
-    }
-    try {
-      toast.loading("Loading...");
-      const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+  // const handleOnlinePayment = async () => {
+  //   if (!addressList[selectAddress]) {
+  //     toast.error("Please select an address before placing the order.");
+  //     return;
+  //   }
+  //   try {
+  //     toast.loading("Loading...");
+  //     const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
 
-      const stripePromise = await loadStripe(stripePublicKey);
+  //     const stripePromise = await loadStripe(stripePublicKey);
 
-      const response = await Axios({
-        ...SummaryApi.payment_url,
-        data: {
-          list_items: cartItemsList,
-          addressId: addressList[selectAddress]?._id,
-          subTotalAmt: totalPrice,
-          totalAmt: totalPrice,
-        },
-      });
+  //     const response = await Axios({
+  //       ...SummaryApi.payment_url,
+  //       data: {
+  //         list_items: cartItemsList,
+  //         addressId: addressList[selectAddress]?._id,
+  //         subTotalAmt: totalPrice,
+  //         totalAmt: totalPrice,
+  //       },
+  //     });
 
-      const { data: responseData } = response;
+  //     const { data: responseData } = response;
 
-      stripePromise.redirectToCheckout({ sessionId: responseData.id });
+  //     stripePromise.redirectToCheckout({ sessionId: responseData.id });
 
-      if (fetchCartItem) {
-        fetchCartItem();
-      }
-      if (fetchOrder) {
-        fetchOrder();
-      }
-    } catch (error) {
-      AxiosToastError(error);
-    }
-  };
+  //     if (fetchCartItem) {
+  //       fetchCartItem();
+  //     }
+  //     if (fetchOrder) {
+  //       fetchOrder();
+  //     }
+  //   } catch (error) {
+  //     AxiosToastError(error);
+  //   }
+  // };
+
   return (
     <section className="bg-blue-50">
       <div className="container mx-auto p-4 flex flex-col lg:flex-row w-full gap-5 justify-between">
@@ -171,7 +172,7 @@ const CheckoutPage = () => {
             </div>
           </div>
           <div className="w-full flex flex-col gap-4">
-            <button
+            {/* <button
               onClick={handleOnlinePayment}
               className={`py-2 px-4 rounded text-white font-semibold ${
                 addressList[selectAddress]
@@ -181,7 +182,7 @@ const CheckoutPage = () => {
               disabled={!addressList[selectAddress]}
             >
               Online Payment
-            </button>
+            </button> */}
 
             <button
               onClick={handleCashOnDelivery}
