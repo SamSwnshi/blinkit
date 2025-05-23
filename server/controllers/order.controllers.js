@@ -100,8 +100,6 @@ export const payment = async (req, res) => {
       cancel_url: `${process.env.FRONTEND_URL}/cancel`,
     };
 
-
-
     const session = await Stripe.checkout.sessions.create(params);
 
     return res.status(200).json(session);
